@@ -1,35 +1,81 @@
 package com.ehab.rakabny.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.ehab.rakabny.R;
+import com.ehab.rakabny.util.JsonUtil;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.callbacks.SubscribeCallback;
+import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    public static final String TAG = MainActivity.class.getName();
+    Toolbar mToolbar;
+
     private GoogleMap mMap;
+    private PubNub mPubNub;
+    public static final String PUBLISH_KEY = "pub-c-df29012c-0242-42b8-8940-95c1d6f06927";
+    public static final String SUBSCRIBE_KEY = "sub-c-1a6bbb64-2858-11e7-b284-02ee2ddab7fe";
+    private Marker mMarker;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private static final String[] LOCATION_PERMS = {
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private static final int LOCATION_REQUEST = 50;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
         if (user != null) {
             if (user.isEmailVerified()) {
                 setContentView(R.layout.activity_main);
+
+                mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+                setSupportActionBar(mToolbar);
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
 
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
 
                 mapFragment.getMapAsync(this);
+
+                initPubNub();
+                
             } else {
                 // Driver signed out or No Network Connection
                 openLoginActivity();
@@ -52,10 +98,96 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                ActivityCompat.requestPermissions(this,
+                        LOCATION_PERMS,
+                        LOCATION_REQUEST);
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        LOCATION_PERMS,
+                        LOCATION_REQUEST);
+            }
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // ...
+                            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+                            CameraPosition cp = CameraPosition.builder().target(loc).zoom(15).build();
+                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 1000, null);
+
+                        }
+                    }
+                });
+
+    }
+
+    private final void initPubNub() {
+        PNConfiguration config = new PNConfiguration();
+
+        config.setPublishKey(PUBLISH_KEY);
+        config.setSubscribeKey(SUBSCRIBE_KEY);
+        config.setSecure(true);
+
+        this.mPubNub = new PubNub(config);
+
+        this.mPubNub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+                // no status handler for simplicity
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                try {
+                    Log.v(TAG, JsonUtil.asJson(message));
+
+                    Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
+                    Map<String, Double> data = map.get("nameValuePairs");
+                    Double lat = data.get("lat");
+                    Double lng = data.get("lng");
+
+                    updateLocation(new LatLng(lat, lng));
+                } catch (Exception e) {
+                    //throw Throwables.propagate(e);
+                }
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                // no presence handler for simplicity
+            }
+        });
+
+
+        this.mPubNub.subscribe().channels(Arrays.asList("Mandra : Mahta")).execute();
+    }
+
+    private void updateLocation(final LatLng location) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (MainActivity.this.mMarker != null) {
+                    MainActivity.this.mMarker.setPosition(location);
+                } else {
+                    MainActivity.this.mMarker = mMap.addMarker(new MarkerOptions().position(location));
+                }
+
+
+
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+            }
+        });
     }
 }
