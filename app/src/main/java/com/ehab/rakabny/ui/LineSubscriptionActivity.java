@@ -84,7 +84,7 @@ public class LineSubscriptionActivity extends AppCompatActivity {
                 mDatabase = FirebaseDatabase.getInstance().getReference();
 
                 // TODO: Change the path to read from the passenger node
-                mDatabase.child("drivers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
+                mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
 
                 Toast.makeText(LineSubscriptionActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
             }
