@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 mapFragment.getMapAsync(this);
 
-                initPubNub();
-
-
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
                 mPassengersReference = mFirebaseDatabase.getReference().child("drivers");
@@ -109,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         username = user.username;
                         email = user.email;
                         lineChannelSubscription = user.line;
-
+                        initPubNub();
                         drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this ,username, email, lineChannelSubscription);
 
                     }
@@ -250,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // I am still subsciping to a static channel
         // TODO : Implement functionality that allow users to select the line they want to subscripe to
-        this.mPubNub.subscribe().channels(Arrays.asList("Mandra : Mahta")).execute();
+        this.mPubNub.subscribe().channels(Arrays.asList(lineChannelSubscription)).execute();
     }
 
     private void updateLocation(final LatLng location) {
