@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.util.JsonUtil;
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -110,25 +113,55 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         LOCATION_PERMS,
                         LOCATION_REQUEST);
             }
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // ...
-                            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                            CameraPosition cp = CameraPosition.builder().target(loc).zoom(15).build();
-                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 1000, null);
 
+        }else{
+            // Permissions is already granted
+            // setup map configurations
+            mMap.setMyLocationEnabled(true);
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // ...
+                                LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+                                CameraPosition cp = CameraPosition.builder().target(loc).zoom(15).build();
+                                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 1000, null);
+
+                            }
                         }
-                    }
-                });
+                    });
+        }
 
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay!
+                    onMapReady(mMap);
+
+                } else {
+                    // permission denied,
+                    // Ask again for the permission
+                    Toast.makeText(this, "Location permission is mandatory for this application", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     private final void initPubNub() {
@@ -137,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         config.setPublishKey(PUBLISH_KEY);
         config.setSubscribeKey(SUBSCRIBE_KEY);
         config.setSecure(true);
+
 
         this.mPubNub = new PubNub(config);
 
@@ -169,6 +203,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
+        // I am still subsciping to a static channel
+        // TODO : Implement functionality that allow users to select the line they want to subscripe to
         this.mPubNub.subscribe().channels(Arrays.asList("Mandra : Mahta")).execute();
     }
 
@@ -183,11 +219,56 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     MainActivity.this.mMarker = mMap.addMarker(new MarkerOptions().position(location));
                 }
 
-
-
-
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             }
         });
+    }
+
+
+    class PubnubFetching extends AsyncTask<PNConfiguration, Void, LatLng>{
+
+        @Override
+        protected LatLng doInBackground(PNConfiguration... params) {
+            PNConfiguration config = new PNConfiguration();
+
+            config.setPublishKey(PUBLISH_KEY);
+            config.setSubscribeKey(SUBSCRIBE_KEY);
+            config.setSecure(true);
+
+            mPubNub = new PubNub(config);
+
+            mPubNub.addListener(new SubscribeCallback() {
+                @Override
+                public void status(PubNub pubnub, PNStatus status) {
+                    // no status handler for simplicity
+                }
+
+                @Override
+                public void message(PubNub pubnub, PNMessageResult message) {
+                    try {
+                        Log.v(TAG, JsonUtil.asJson(message));
+
+                        Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
+                        Map<String, Double> data = map.get("nameValuePairs");
+                        Double lat = data.get("lat");
+                        Double lng = data.get("lng");
+
+                    } catch (Exception e) {
+                        //throw Throwables.propagate(e);
+                    }
+                }
+
+                @Override
+                public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                    // no presence handler for simplicity
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(LatLng latLng) {
+            super.onPostExecute(latLng);
+        }
     }
 }
