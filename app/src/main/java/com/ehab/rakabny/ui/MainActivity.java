@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
-                mPassengersReference = mFirebaseDatabase.getReference().child("drivers");
+                mPassengersReference = mFirebaseDatabase.getReference().child("passengers");
 
                 // addValueEventListener will always listen for changes so if the user update his profile or
                 // change subscription line every thing will be updated properly in thins activity
