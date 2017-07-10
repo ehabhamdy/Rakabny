@@ -346,4 +346,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(openSubscriptionIntent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(drawerUtil.getDrawer() != null) {
+            drawerUtil.getDrawer().setSelection(1);
+            drawerUtil.getDrawer().closeDrawer();
+        }
+    }
 }
