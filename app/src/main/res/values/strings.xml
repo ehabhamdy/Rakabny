@@ -9,4 +9,10 @@
     <string name="sign_up_hint">Sign Up</string>
     <string name="signup_activity_title">Sign Up</string>
     <string name="login_activity_title">Login</string>
+
+    <string name="nav_main_label">Main</string>
+    <string name="nav_subscribe_label">Subscribe to line</string>
+    <string name="nav_profile_label">Profile</string>
+    <string name="nav_settings_label">Settings</string>
+    <string name="nav_logout_label">Logout</string>
 </resources>

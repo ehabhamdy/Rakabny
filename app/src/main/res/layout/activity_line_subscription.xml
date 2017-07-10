@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ehab.rakabny.ui.LineSubscriptionActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:paddingTop="@dimen/appbar_padding_top">
+
+        <include layout="@layout/login_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#efefef"
+        android:elevation="8dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioLinesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radioManshiaAsfra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Manshia : Asfra" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="#979797" />
+
+                <RadioButton
+                    android:id="@+id/radioManshiaVictoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manshia : Victoria" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="#979797" />
+
+                <RadioButton
+                    android:id="@+id/radioManshiaMandra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manshia : Mandra" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="#979797" />
+
+                <RadioButton
+                    android:id="@+id/radioAsfraMahta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Asfra : Mahta" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="#979797" />
+
+                <RadioButton
+                    android:id="@+id/radioMandraMahta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mandra : Mahta" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="#979797" />
+
+                <RadioButton
+                    android:id="@+id/radioMandraAboker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mandra : Aboker" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:text="Confirm your Change"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_info_black_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Changing you line subscription will make your vehicle to the passenger in your newly selected route" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,9 +1,7 @@
 package com.ehab.rakabny.ui;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
@@ -11,10 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ehab.rakabny.R;
+import com.ehab.rakabny.model.Passenger;
 import com.ehab.rakabny.util.JsonUtil;
+import com.ehab.rakabny.util.NavigationDrawerUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,10 +28,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.SubscribeCallback;
@@ -56,12 +64,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     };
     private static final int LOCATION_REQUEST = 50;
 
+    String userId;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mPassengersReference;
+
+    String username;
+    String email;
+    String lineChannelSubscription;
+
+    NavigationDrawerUtil drawerUtil = new NavigationDrawerUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             if (user.isEmailVerified()) {
@@ -77,7 +94,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mapFragment.getMapAsync(this);
 
                 initPubNub();
-                
+
+
+                userId = user.getUid();
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mPassengersReference = mFirebaseDatabase.getReference().child("drivers");
+
+                // addValueEventListener will always listen for changes so if the user update his profile or
+                // change subscription line every thing will be updated properly in thins activity
+                mPassengersReference.child(userId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Passenger user = dataSnapshot.getValue(Passenger.class);
+                        username = user.username;
+                        email = user.email;
+                        lineChannelSubscription = user.line;
+
+                        drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this ,username, email, lineChannelSubscription);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
+
+                new DrawerBuilder().withActivity(this).withToolbar(mToolbar).build();
+
             } else {
                 // Driver signed out or No Network Connection
                 openLoginActivity();
@@ -128,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 // ...
                                 LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
                                 CameraPosition cp = CameraPosition.builder().target(loc).zoom(15).build();
-                                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 1000, null);
+                                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 500, null);
 
                             }
                         }
@@ -271,4 +316,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             super.onPostExecute(latLng);
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bookmark_menu:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+        return false;
+    }
+
+    public void openLineSubscription(View view){
+        Intent openSubscriptionIntent = new Intent(getApplicationContext(), LineSubscriptionActivity.class);
+        openSubscriptionIntent.putExtra(NavigationDrawerUtil.SUB_LINE_EXTRA, lineChannelSubscription);
+        if(lineChannelSubscription != null)
+            startActivity(openSubscriptionIntent);
+    }
+
 }

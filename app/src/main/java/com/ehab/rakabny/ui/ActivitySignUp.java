@@ -151,7 +151,8 @@ public class ActivitySignUp extends ActivityBase {
 
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
-        Passenger passenger = new Passenger(name, email, defaultLine);
+        int numberOfTickets = 0;
+        Passenger passenger = new Passenger(name, email, defaultLine, numberOfTickets);
 
         mDatabase.child("passengers").child(userId).setValue(passenger);
     }

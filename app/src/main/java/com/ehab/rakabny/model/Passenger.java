@@ -13,6 +13,7 @@ public class Passenger {
     public String username;
     public String email;
     public String line;
+    public int numberOfTickets;
 
 
     public Passenger() {
@@ -22,9 +23,10 @@ public class Passenger {
     public Passenger(String username) {
         this.username = username;
     }
-    public Passenger(String username, String email, String line) {
+    public Passenger(String username, String email, String line, int numberOfTickets) {
         this.username = username;
         this.email = email;
         this.line = line;
+        this.numberOfTickets = numberOfTickets;
     }
 }
