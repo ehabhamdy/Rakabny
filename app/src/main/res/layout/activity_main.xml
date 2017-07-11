@@ -10,18 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--TODO: Implement shared element transition after setting up core fundtionality-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="25dp"
-            android:background="#ceffffff"
-            android:elevation="10dp"
-            android:onClick="openLineSubscription"
-            android:text="Select Line" />
+        <!--TODO: Implement shared element transition after setting up core fuctionality-->
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -30,6 +19,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.MainActivity" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/gradient_overlay" />
+
+        <TextView
+            android:id="@+id/currentLineTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp"
+            android:text="@string/current_line_textview_text"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#ceffffff"
+            android:elevation="10dp"
+            android:onClick="openLineSubscription"
+            android:text="Select Line" />
+
+
     </FrameLayout>
 
 </LinearLayout>
