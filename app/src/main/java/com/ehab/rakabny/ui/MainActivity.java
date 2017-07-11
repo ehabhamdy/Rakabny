@@ -91,8 +91,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (user != null) {
             if (user.isEmailVerified()) {
+
                 setContentView(R.layout.activity_main);
-                ButterKnife.bind(this);
+                ButterKnife.bind(MainActivity.this);
 
                 mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
                 setSupportActionBar(mToolbar);
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
 
-                mapFragment.getMapAsync(this);
+                mapFragment.getMapAsync(MainActivity.this);
 
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();

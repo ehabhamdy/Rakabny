@@ -83,7 +83,7 @@ public class NavigationDrawerUtil {
                                 Intent openSubscriptionIntent = new Intent(activity.getApplicationContext(), LineSubscriptionActivity.class);
                                 openSubscriptionIntent.putExtra(SUB_LINE_EXTRA, line);
                                 activity.startActivity(openSubscriptionIntent);
-                                activity.overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+                                activity.overridePendingTransition(R.anim.slide_up, R.anim.no_change);
                                 drawer.closeDrawer();
                                 return true;
                             case 5:
