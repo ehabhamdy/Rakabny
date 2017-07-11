@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ehab.rakabny.R;
@@ -48,21 +49,29 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    public static final String TAG = MainActivity.class.getName();
-    Toolbar mToolbar;
 
-    private GoogleMap mMap;
-    private PubNub mPubNub;
+    public static final String TAG = MainActivity.class.getName();
+    private static final int LOCATION_REQUEST = 50;
     public static final String PUBLISH_KEY = "pub-c-df29012c-0242-42b8-8940-95c1d6f06927";
     public static final String SUBSCRIBE_KEY = "sub-c-1a6bbb64-2858-11e7-b284-02ee2ddab7fe";
+
+    Toolbar mToolbar;
+    private GoogleMap mMap;
+    private PubNub mPubNub;
     private Marker mMarker;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String[] LOCATION_PERMS = {
             android.Manifest.permission.ACCESS_FINE_LOCATION
     };
-    private static final int LOCATION_REQUEST = 50;
+
+
+    @BindView(R.id.currentLineTextView)
+    TextView lineTextView;
 
     String userId;
     private FirebaseDatabase mFirebaseDatabase;
@@ -83,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user != null) {
             if (user.isEmailVerified()) {
                 setContentView(R.layout.activity_main);
+                ButterKnife.bind(this);
 
                 mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
                 setSupportActionBar(mToolbar);
@@ -106,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         username = user.username;
                         email = user.email;
                         lineChannelSubscription = user.line;
+
+                        lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + lineChannelSubscription);
+
                         initPubNub();
                         drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this ,username, email, lineChannelSubscription);
 
@@ -341,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         openSubscriptionIntent.putExtra(NavigationDrawerUtil.SUB_LINE_EXTRA, lineChannelSubscription);
         if(lineChannelSubscription != null)
             startActivity(openSubscriptionIntent);
+            overridePendingTransition(R.anim.slide_up, R.anim.no_change);
     }
 
     @Override
