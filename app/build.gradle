@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "SUB_KEY", SUB_KEY)
+        buildConfigField("String", "PUB_KEY", PUB_KEY)
+        buildConfigField("String", "INSTABUG_APP_TOKEN", INSTABUG_APP_TOKEN)
+
     }
     buildTypes {
         release {
@@ -33,9 +37,6 @@ dependencies {
     }
 
     compile group: 'com.pubnub', name: 'pubnub', version: '4.2.3'
-
-
-
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:design:25.4.0'
     compile 'com.google.android.gms:play-services-location:11.0.2'
@@ -46,6 +47,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'com.instabug.library:instabug:4.2.5'
     compile 'com.android.support:cardview-v7:25.3.1'
 }
 

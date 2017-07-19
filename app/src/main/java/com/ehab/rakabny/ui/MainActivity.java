@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ehab.rakabny.BuildConfig;
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
 import com.ehab.rakabny.util.JsonUtil;
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public static final String TAG = MainActivity.class.getName();
     private static final int LOCATION_REQUEST = 50;
-    public static final String PUBLISH_KEY = "pub-c-df29012c-0242-42b8-8940-95c1d6f06927";
-    public static final String SUBSCRIBE_KEY = "sub-c-1a6bbb64-2858-11e7-b284-02ee2ddab7fe";
+    public static final String PUBLISH_KEY = BuildConfig.PUB_KEY;
+    public static final String SUBSCRIBE_KEY = BuildConfig.SUB_KEY;
 
     Toolbar mToolbar;
     private GoogleMap mMap;
@@ -275,7 +276,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     MainActivity.this.mMarker = mMap.addMarker(new MarkerOptions().position(location));
                 }
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                //Camera shouldn't move with every bus location
+                //mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             }
         });
     }
