@@ -20,7 +20,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="50dp">
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="100dp"
