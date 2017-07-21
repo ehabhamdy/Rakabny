@@ -16,7 +16,7 @@ public class RakkebneyApplication extends Application {
         super.onCreate();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         new Instabug.Builder(this, BuildConfig.INSTABUG_APP_TOKEN)
-                .setInvocationEvent(InstabugInvocationEvent.SHAKE)
+                .setInvocationEvent(InstabugInvocationEvent.FLOATING_BUTTON)
                 .build();
     }
 }
