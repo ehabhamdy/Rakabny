@@ -47,6 +47,7 @@ import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private PubNub mPubNub;
     private Marker mMarker;
+    private HashMap<Double, Marker> busMarkers;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String[] LOCATION_PERMS = {
             android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        busMarkers = new HashMap<>();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -244,12 +247,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
                     Map<String, Double> data = map.get("nameValuePairs");
-                    Double lat = data.get("lat");
-                    Double lng = data.get("lng");
+                    final Double lat = data.get("lat");
+                    final Double lng = data.get("lng");
+                    final Double busNumber = data.get("bnum");
 
-                    updateLocation(new LatLng(lat, lng));
+                    if(busMarkers.get(busNumber) != null)
+                        updateLocation(new LatLng(lat, lng), busNumber);
+                    else
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Marker m = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+                                busMarkers.put(busNumber, m);
+                            }
+                        });
+                    }
                 } catch (Exception e) {
                     //throw Throwables.propagate(e);
+                    Log.e(TAG, e.getMessage());
                 }
             }
 
@@ -265,69 +281,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.mPubNub.subscribe().channels(Arrays.asList(lineChannelSubscription)).execute();
     }
 
-    private void updateLocation(final LatLng location) {
+    private void updateLocation(final LatLng location, final double num) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                if (MainActivity.this.mMarker != null) {
-                    MainActivity.this.mMarker.setPosition(location);
-                } else {
-                    MainActivity.this.mMarker = mMap.addMarker(new MarkerOptions().position(location));
-                }
-
-                //Camera shouldn't move with every bus location
-                //mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                if(busMarkers.get(num) != null)
+                    busMarkers.get(num).setPosition(location);
             }
         });
-    }
-
-
-    class PubnubFetching extends AsyncTask<PNConfiguration, Void, LatLng>{
-
-        @Override
-        protected LatLng doInBackground(PNConfiguration... params) {
-            PNConfiguration config = new PNConfiguration();
-
-            config.setPublishKey(PUBLISH_KEY);
-            config.setSubscribeKey(SUBSCRIBE_KEY);
-            config.setSecure(true);
-
-            mPubNub = new PubNub(config);
-
-            mPubNub.addListener(new SubscribeCallback() {
-                @Override
-                public void status(PubNub pubnub, PNStatus status) {
-                    // no status handler for simplicity
-                }
-
-                @Override
-                public void message(PubNub pubnub, PNMessageResult message) {
-                    try {
-                        Log.v(TAG, JsonUtil.asJson(message));
-
-                        Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
-                        Map<String, Double> data = map.get("nameValuePairs");
-                        Double lat = data.get("lat");
-                        Double lng = data.get("lng");
-
-                    } catch (Exception e) {
-                        //throw Throwables.propagate(e);
-                    }
-                }
-
-                @Override
-                public void presence(PubNub pubnub, PNPresenceEventResult presence) {
-                    // no presence handler for simplicity
-                }
-            });
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(LatLng latLng) {
-            super.onPostExecute(latLng);
-        }
     }
 
 

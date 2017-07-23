@@ -13,7 +13,7 @@ public class Passenger {
     public String username;
     public String email;
     public String line;
-    public int numberOfTickets;
+    public int numberOfTickets = 0;
 
 
     public Passenger() {
