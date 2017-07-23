@@ -3,7 +3,6 @@ package com.ehab.rakabny.ui;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -250,15 +250,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     final Double lat = data.get("lat");
                     final Double lng = data.get("lng");
                     final Double busNumber = data.get("bnum");
+                    Double numberOfFreePlaces = data.get("free");
 
                     if(busMarkers.get(busNumber) != null)
-                        updateLocation(new LatLng(lat, lng), busNumber);
+                        updateLocation(new LatLng(lat, lng), busNumber, numberOfFreePlaces);
                     else
                     {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Marker m = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+                                Marker m = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.green_car)));
                                 busMarkers.put(busNumber, m);
                             }
                         });
@@ -281,12 +282,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.mPubNub.subscribe().channels(Arrays.asList(lineChannelSubscription)).execute();
     }
 
-    private void updateLocation(final LatLng location, final double num) {
+    private void updateLocation(final LatLng location, final double num, final double numberOfFreePlaces) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(busMarkers.get(num) != null)
+                if(busMarkers.get(num) != null) {
                     busMarkers.get(num).setPosition(location);
+                    if(numberOfFreePlaces > 0)
+                        busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
+                    else
+                        busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_car));
+                    busMarkers.get(num).setTitle(numberOfFreePlaces + " Free Places");
+                }
             }
         });
     }
