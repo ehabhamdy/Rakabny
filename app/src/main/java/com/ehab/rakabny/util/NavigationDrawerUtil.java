@@ -29,12 +29,14 @@ public class NavigationDrawerUtil {
     AccountHeader headerResult;
 
     public static final String  SUB_LINE_EXTRA = "Line_Extra_Data";
+    public static final String  USERNAME_EXTRA = "Username_Data";
+    public static final String  EMAIL_EXTRA = "email_Data";
 
     public Drawer getDrawer() {
         return drawer;
     }
 
-    public Drawer SetupNavigationDrawer(Toolbar mToolbar, final Activity activity , String username, String email, final String line) {
+    public Drawer SetupNavigationDrawer(Toolbar mToolbar, final Activity activity , final String username, final String email, final String line) {
         // Create the AccountHeader
 
 
@@ -88,6 +90,8 @@ public class NavigationDrawerUtil {
                                 return true;
                             case 5:
                                 Intent openProfileIntent = new Intent(activity.getApplicationContext(), ProfileActivity.class);
+                                openProfileIntent.putExtra(USERNAME_EXTRA, username);
+                                openProfileIntent.putExtra(EMAIL_EXTRA, email);
                                 activity.startActivity(openProfileIntent);
                                 drawer.closeDrawer();
                                 return true;
