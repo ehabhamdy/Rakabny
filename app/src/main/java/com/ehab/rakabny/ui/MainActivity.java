@@ -246,7 +246,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.v(TAG, JsonUtil.asJson(message));
 
                     Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
-                    Map<String, Double> data = map.get("nameValuePairs");
+                    final Map<String, Double> data = map.get("nameValuePairs");
+                    if(data.get("closeSignal") != null){
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                busMarkers.get(data.get("bnum")).remove();
+                                busMarkers.remove(data.get("bnum"));
+                            }
+                        });
+                        return;
+                    }
                     final Double lat = data.get("lat");
                     final Double lng = data.get("lng");
                     final Double busNumber = data.get("bnum");
@@ -289,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if(busMarkers.get(num) != null) {
                     busMarkers.get(num).setPosition(location);
                     if(numberOfFreePlaces > 0)
-                        busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
+                            busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
                     else
                         busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_car));
                     busMarkers.get(num).setTitle(numberOfFreePlaces + " Free Places");
