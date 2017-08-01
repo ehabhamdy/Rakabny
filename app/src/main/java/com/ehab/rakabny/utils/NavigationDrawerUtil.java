@@ -97,6 +97,7 @@ public class NavigationDrawerUtil {
                                 return true;
                             case 5:
                                 Intent openTicketsIntent = new Intent(activity.getApplicationContext(), TicketsActivity.class);
+                                openTicketsIntent.putExtra(TICKETS_EXTRA, String.valueOf(user.numberOfTickets));
                                 activity.startActivity(openTicketsIntent);
                                 drawer.closeDrawer();
                                 return true;

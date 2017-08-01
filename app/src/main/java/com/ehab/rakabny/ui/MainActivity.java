@@ -3,6 +3,7 @@ package com.ehab.rakabny.ui;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +15,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ehab.rakabny.BuildConfig;
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
+import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.utils.JsonUtil;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -54,7 +58,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
 
     public static final String TAG = MainActivity.class.getName();
@@ -65,16 +69,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Toolbar mToolbar;
     private GoogleMap mMap;
     private PubNub mPubNub;
-    private Marker mMarker;
     private HashMap<Double, Marker> busMarkers;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String[] LOCATION_PERMS = {
             android.Manifest.permission.ACCESS_FINE_LOCATION
     };
 
+    LatLng userCurrentLocation;
+
 
     @BindView(R.id.currentLineTextView)
     TextView lineTextView;
+
+    @BindView(R.id.tickets_textview)
+    TextView ticketsTextView;
 
     String userId;
     private FirebaseDatabase mFirebaseDatabase;
@@ -109,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 mapFragment.getMapAsync(MainActivity.this);
 
+
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
                 mPassengersReference = mFirebaseDatabase.getReference().child("passengers");
@@ -119,10 +128,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Passenger user = dataSnapshot.getValue(Passenger.class);
-                        /*username = user.username;
-                        email = user.email;
+                        /*email = user.email;*/
+                        username = user.username;
+                        tickets = user.numberOfTickets;
                         lineChannelSubscription = user.line;
-                        tickets = user.numberOfTickets;*/
+
+                        ticketsTextView.setText("           "+tickets + " Tickets") ;
 
                         lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
 
@@ -162,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setOnMarkerClickListener(this);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -188,8 +199,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // ...
-                                LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                                CameraPosition cp = CameraPosition.builder().target(loc).zoom(15).build();
+                                userCurrentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                CameraPosition cp = CameraPosition.builder().target(userCurrentLocation).zoom(15).build();
                                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 500, null);
 
                             }
@@ -274,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             @Override
                             public void run() {
                                 Marker m = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.green_car)));
+                                m.setTitle(String.valueOf(busNumber));
                                 busMarkers.put(busNumber, m);
                             }
                         });
@@ -306,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
                     else
                         busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_car));
-                    busMarkers.get(num).setTitle(numberOfFreePlaces + " Free Places");
+                    busMarkers.get(num).setTitle(String.valueOf(num));
                 }
             }
         });
@@ -349,5 +361,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             drawerUtil.getDrawer().setSelection(1);
             drawerUtil.getDrawer().closeDrawer();
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Confirm Reservation")
+                .content("By confirming your reservation you will get a place in this bus")
+                .positiveText("yes")
+                .negativeText("no")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                        if(tickets > 0) {
+                            //Charge one ticket from the user
+                            tickets--;
+                            mPassengersReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(tickets);
+
+                            //store reservation in the database
+                            Ticket t = new Ticket(username, FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
+
+                            String key = mFirebaseDatabase.getReference().child("reservations").push().getKey();
+                            String bus = marker.getTitle();
+                            mFirebaseDatabase.getReference().child("reservations").child(bus.substring(0, bus.length() - 2)).child(key).setValue(t);
+
+                        }else{
+                            dialog.dismiss();
+                            new MaterialDialog.Builder(MainActivity.this)
+                                    .title("You don't have tickets")
+                                    .content("Please purchase tickets and continue your reservation")
+                                    .positiveText("Ok")
+                                    .show();
+                        }
+                    }
+                })
+                .show();
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.ehab.rakabny.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ehab.rakabny.R;
+import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,6 +44,10 @@ public class TicketsActivity extends AppCompatActivity {
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
         tv.setText("Buy Tickets");
 
+        Intent intent = getIntent();
+
+        final int tickets =  Integer.parseInt(intent.getStringExtra(NavigationDrawerUtil.TICKETS_EXTRA));
+
         ButterKnife.bind(this);
         confirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +56,8 @@ public class TicketsActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(numberOfTickets) && (Integer.parseInt(numberOfTickets) > 0)){
                     Toast.makeText(TicketsActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
                     mDatabase = FirebaseDatabase.getInstance().getReference();
-                    Toast.makeText(TicketsActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
-                    mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(Integer.parseInt(numberOfTickets));
+                    //Toast.makeText(TicketsActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+                    mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(Integer.parseInt(numberOfTickets) + tickets);
                 }
             }
         });

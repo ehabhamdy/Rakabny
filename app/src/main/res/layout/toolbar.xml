@@ -14,5 +14,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/app_title" />
 
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/tickets_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"/>
+
 
 </android.support.v7.widget.Toolbar>
