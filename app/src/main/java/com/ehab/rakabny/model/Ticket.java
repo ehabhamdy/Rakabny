@@ -10,10 +10,13 @@ public class Ticket {
     public String username;
     public LatLng userLocation;
     public String ticketNumber;
+    public String userID;
+    public boolean valid = true;
 
-    public Ticket(String username, String ticketNumber, LatLng userLocation) {
+    public Ticket(String username, String ticketNumber, String userID ,LatLng userLocation) {
         this.username = username;
         this.ticketNumber = ticketNumber;
         this.userLocation = userLocation;
+        this.userID = userID;
     }
 }

@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         ticketsTextView.setText("           "+tickets + " Tickets") ;
 
                         lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
+                        busMarkers.clear();
+                        mMap.clear();
 
                         initPubNub();
                         drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this, user);
@@ -302,8 +304,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
-        // I am still subsciping to a static channel
         // TODO : Implement functionality that allow users to select the line they want to subscripe to
         this.mPubNub.subscribe().channels(Arrays.asList(lineChannelSubscription)).execute();
     }
@@ -377,12 +377,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if(tickets > 0) {
                             //Charge one ticket from the user
                             tickets--;
-                            mPassengersReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(tickets);
+
+                            mPassengersReference.child(userId).child("numberOfTickets").setValue(tickets);
 
                             //store reservation in the database
-                            Ticket t = new Ticket(username, FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
-
                             String key = mFirebaseDatabase.getReference().child("reservations").push().getKey();
+                            Ticket t = new Ticket(username, key,FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
                             String bus = marker.getTitle();
                             mFirebaseDatabase.getReference().child("reservations").child(bus.substring(0, bus.length() - 2)).child(key).setValue(t);
 
