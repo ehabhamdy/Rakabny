@@ -19,4 +19,5 @@
     <string name="title_widget_info">Rakkebny</string>
     <string name="ticket_purchase_tip">After purchasing successsfully completed you can follow buses on the Map and reserve them</string>
     <string name="line_selection_tip">Changing you line subscription will make your vehicle to the passenger in your newly selected route</string>
+    <string name="tickets_number">tickets</string>
 </resources>

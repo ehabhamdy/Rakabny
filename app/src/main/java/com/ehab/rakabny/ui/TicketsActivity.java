@@ -1,6 +1,8 @@
 package com.ehab.rakabny.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,10 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ehab.rakabny.R;
+import com.ehab.rakabny.model.Passenger;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.instabug.library.core.ui.BaseContract;
 
 import butterknife.BindView;
@@ -31,6 +37,7 @@ public class TicketsActivity extends AppCompatActivity {
     Button confirmationButton;
 
     private DatabaseReference mDatabase;
+    int tickets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,27 @@ public class TicketsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        final int tickets =  Integer.parseInt(intent.getStringExtra(NavigationDrawerUtil.TICKETS_EXTRA));
+        if(intent.getStringExtra(NavigationDrawerUtil.TICKETS_EXTRA) != null)
+             tickets =  Integer.parseInt(intent.getStringExtra(NavigationDrawerUtil.TICKETS_EXTRA));
+        else{
+            FirebaseDatabase mFirebaseDatabase;
+            DatabaseReference mPassengersReference;
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mPassengersReference = mFirebaseDatabase.getReference().child("passengers");
+            mPassengersReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Passenger user = dataSnapshot.getValue(Passenger.class);
+                    tickets = user.numberOfTickets;
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
 
         ButterKnife.bind(this);
         confirmationButton.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +85,11 @@ public class TicketsActivity extends AppCompatActivity {
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     //Toast.makeText(TicketsActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
                     mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(Integer.parseInt(numberOfTickets) + tickets);
+
+                    SharedPreferences sharedPref = TicketsActivity.this.getSharedPreferences("ehab", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt(getString(R.string.tickets_number), Integer.parseInt(numberOfTickets) + tickets);
+                    editor.commit();
                 }
             }
         });
