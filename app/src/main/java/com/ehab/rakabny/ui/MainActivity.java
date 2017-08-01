@@ -17,8 +17,8 @@ import android.widget.Toast;
 import com.ehab.rakabny.BuildConfig;
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
-import com.ehab.rakabny.util.JsonUtil;
-import com.ehab.rakabny.util.NavigationDrawerUtil;
+import com.ehab.rakabny.utils.JsonUtil;
+import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     String username;
     String email;
     String lineChannelSubscription;
+    int tickets;
 
     NavigationDrawerUtil drawerUtil = new NavigationDrawerUtil();
 
@@ -118,14 +119,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Passenger user = dataSnapshot.getValue(Passenger.class);
-                        username = user.username;
+                        /*username = user.username;
                         email = user.email;
                         lineChannelSubscription = user.line;
+                        tickets = user.numberOfTickets;*/
 
-                        lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + lineChannelSubscription);
+                        lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
 
                         initPubNub();
-                        drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this ,username, email, lineChannelSubscription);
+                        drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this, user);
 
                     }
 
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         LOCATION_REQUEST);
             }
 
-        }else{
+        } else {
             // Permissions is already granted
             // setup map configurations
             mMap.setMyLocationEnabled(true);
@@ -247,13 +249,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     Map<String, LinkedHashMap> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
                     final Map<String, Double> data = map.get("nameValuePairs");
-                    if(data.get("closeSignal") != null){
+                    if (data.get("closeSignal") != null) {
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                busMarkers.get(data.get("bnum")).remove();
-                                busMarkers.remove(data.get("bnum"));
+                                if (busMarkers.get(data.get("bnum")) != null) {
+                                    busMarkers.get(data.get("bnum")).remove();
+                                    busMarkers.remove(data.get("bnum"));
+                                }
                             }
                         });
                         return;
@@ -263,10 +267,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     final Double busNumber = data.get("bnum");
                     Double numberOfFreePlaces = data.get("free");
 
-                    if(busMarkers.get(busNumber) != null)
+                    if (busMarkers.get(busNumber) != null)
                         updateLocation(new LatLng(lat, lng), busNumber, numberOfFreePlaces);
-                    else
-                    {
+                    else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -297,10 +300,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(busMarkers.get(num) != null) {
+                if (busMarkers.get(num) != null) {
                     busMarkers.get(num).setPosition(location);
-                    if(numberOfFreePlaces > 0)
-                            busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
+                    if (numberOfFreePlaces > 0)
+                        busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_car));
                     else
                         busMarkers.get(num).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_car));
                     busMarkers.get(num).setTitle(numberOfFreePlaces + " Free Places");
@@ -331,18 +334,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return false;
     }
 
-    public void openLineSubscription(View view){
+    public void openLineSubscription(View view) {
         Intent openSubscriptionIntent = new Intent(getApplicationContext(), LineSubscriptionActivity.class);
         openSubscriptionIntent.putExtra(NavigationDrawerUtil.SUB_LINE_EXTRA, lineChannelSubscription);
-        if(lineChannelSubscription != null)
+        if (lineChannelSubscription != null)
             startActivity(openSubscriptionIntent);
-            overridePendingTransition(R.anim.slide_up, R.anim.no_change);
+        overridePendingTransition(R.anim.slide_up, R.anim.no_change);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(drawerUtil.getDrawer() != null) {
+        if (drawerUtil.getDrawer() != null) {
             drawerUtil.getDrawer().setSelection(1);
             drawerUtil.getDrawer().closeDrawer();
         }

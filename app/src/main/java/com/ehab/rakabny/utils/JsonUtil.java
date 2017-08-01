@@ -1,4 +1,4 @@
-package com.ehab.rakabny.util;
+package com.ehab.rakabny.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -65,12 +65,13 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/select_image_btn"
+                    android:id="@+id/select_image_button"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_gravity="right"
                     android:background="@drawable/bg_btn"
-                    android:text="Edit"
+                    android:text="Change Photo"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -79,48 +80,98 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingTop="20dp">
 
-        <TextView
-            android:id="@+id/profile_username_textview"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="30dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
-            android:text="User Name"
-            android:fontFamily="sans-serif-thin"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-        <TextView
-            android:id="@+id/profile_email_textview"
-            android:paddingTop="10dp"
+            android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:paddingLeft="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="Email"
-            android:fontFamily="sans-serif-thin"
-            android:layout_marginBottom="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:paddingTop="10dp">
 
-        <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="30dp"
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_username_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                tools:text="Ehab Hamdy"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
-            android:text="Tickets"
-            android:fontFamily="sans-serif-thin"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_email_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                tools:text="ehabhamdy2012@gmail.com"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Tickets"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tickets_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                tools:text="0"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </LinearLayout>

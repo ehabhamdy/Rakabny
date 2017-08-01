@@ -1,4 +1,4 @@
-package com.ehab.rakabny.util;
+package com.ehab.rakabny.utils;
 
 import com.google.firebase.database.FirebaseDatabase;
 
