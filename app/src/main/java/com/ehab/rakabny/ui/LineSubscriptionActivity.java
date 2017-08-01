@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ehab.rakabny.util.NavigationDrawerUtil;
+import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

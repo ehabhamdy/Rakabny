@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:initialKeyguardLayout="@layout/rakkebny_widget_layout"
+    android:initialLayout="@layout/rakkebny_widget_layout"
+    android:minHeight="140dp"
+    android:minWidth="180dp"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen|keyguard"
+    tools:ignore="UnusedAttribute"
+    android:previewImage="@drawable/logo"/>
