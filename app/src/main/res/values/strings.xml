@@ -52,4 +52,9 @@
     <string name="email_label_text">Email</string>
     <string name="tickets_label_text">Tickets</string>
     <string name="subscription_activity_label">Subscribe to line</string>
+    <string name="connection_error_message">No Internet Connection</string>
+    <string name="authentication_error_message">Email or Password is wrong      Authentication Failed!</string>
+    <string name="signup_feedback_message">Check your email inbox to verify your email and login here</string>
+    <string name="progressbar_loading_message">Loading...</string>
+    <string name="photo_picker_title">Select Picture</string>
 </resources>

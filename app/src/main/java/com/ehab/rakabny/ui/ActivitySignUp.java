@@ -140,7 +140,7 @@ public class ActivitySignUp extends ActivityBase {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        startActivity(intent);
 
-        Toast.makeText(getApplicationContext(), "Check your email inbox to verify your email and login here", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.signup_feedback_message, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, ActivityLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -171,7 +171,7 @@ public class ActivitySignUp extends ActivityBase {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getString(R.string.progressbar_loading_message));
         }
 
         mProgressDialog.show();

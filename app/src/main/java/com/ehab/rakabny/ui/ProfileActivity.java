@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture") , SELECT_PICTURE);
+                        getString(R.string.photo_picker_title)) , SELECT_PICTURE);
             }
         });
 

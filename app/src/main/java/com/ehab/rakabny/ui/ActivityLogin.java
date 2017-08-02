@@ -70,7 +70,7 @@ public class ActivityLogin extends ActivityBase {
                     String p = mPasswordField.getText().toString();
                     login(e, p);
                 } else {
-                    Toast.makeText(ActivityLogin.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityLogin.this, R.string.connection_error_message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -111,7 +111,7 @@ public class ActivityLogin extends ActivityBase {
                                 FirebaseAuth.getInstance().signOut();
 
                             } else {
-                                Toast.makeText(ActivityLogin.this, "Email or Password is wrong \n    Authentication Failed!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLogin.this, R.string.authentication_error_message, Toast.LENGTH_SHORT).show();
                             }
                         }
 
