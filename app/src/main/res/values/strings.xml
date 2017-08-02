@@ -57,4 +57,14 @@
     <string name="signup_feedback_message">Check your email inbox to verify your email and login here</string>
     <string name="progressbar_loading_message">Loading...</string>
     <string name="photo_picker_title">Select Picture</string>
+    <string name="ticket_purchase_confirmed_message">Confirmed</string>
+    <string name="ticket_pref_key">ehab</string>
+    <string name="line_subscription_confirmed_message">Confirmed</string>
+    <string name="authentication_failed_message">Account is not verified     Authentication Failed!</string>
+    <string name="tickets_text1_text">Tickets</string>
+    <string name="default_line_text">Manshia : Asfra</string>
+    <string name="progressdialog_loading_text">Loading...</string>
+    <string name="email_field_required_text">Required</string>
+    <string name="password_field_required_text">Required</string>
+    <string name="signup_failed_message">Sign Up Failed</string>
 </resources>

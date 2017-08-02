@@ -45,7 +45,7 @@ public class RWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.buyTicket_button, ticketPurchasePendingIntent);
 
 
-            SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("ehab", Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences(context.getResources().getString(R.string.ticket_pref_key), Context.MODE_PRIVATE);
             int tickets = sharedPref.getInt(context.getString(R.string.tickets_number),5);
             views.setTextViewText(R.id.tickets_number_textview, String.valueOf(tickets));
 

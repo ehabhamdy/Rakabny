@@ -107,7 +107,7 @@ public class ActivityLogin extends ActivityBase {
                         } else {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             if (mAuth.getCurrentUser() != null && !mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(ActivityLogin.this, "Account is not verified \n   Authentication Failed!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityLogin.this, R.string.authentication_failed_message, Toast.LENGTH_SHORT).show();
                                 FirebaseAuth.getInstance().signOut();
 
                             } else {
@@ -125,14 +125,14 @@ public class ActivityLogin extends ActivityBase {
     private boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(mEmailField.getText().toString())) {
-            mEmailField.setError("Required");
+            mEmailField.setError(getString(R.string.email_field_required_text));
             result = false;
         } else {
             mEmailField.setError(null);
         }
 
         if (TextUtils.isEmpty(mPasswordField.getText().toString())) {
-            mPasswordField.setError("Required");
+            mPasswordField.setError(getString(R.string.password_field_required_text));
             result = false;
         } else {
             mPasswordField.setError(null);

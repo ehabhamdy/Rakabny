@@ -81,12 +81,12 @@ public class TicketsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String numberOfTickets = numberOfTicketsEditText.getText().toString();
                 if(!TextUtils.isEmpty(numberOfTickets) && (Integer.parseInt(numberOfTickets) > 0)){
-                    Toast.makeText(TicketsActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TicketsActivity.this, R.string.ticket_purchase_confirmed_message, Toast.LENGTH_SHORT).show();
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     //Toast.makeText(TicketsActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
                     mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(Integer.parseInt(numberOfTickets) + tickets);
 
-                    SharedPreferences sharedPref = TicketsActivity.this.getSharedPreferences("ehab", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPref = TicketsActivity.this.getSharedPreferences(getString(R.string.ticket_pref_key), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putInt(getString(R.string.tickets_number), Integer.parseInt(numberOfTickets) + tickets);
                     editor.commit();

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.ehab.rakabny.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -29,7 +30,7 @@ public class ActivityBase extends AppCompatActivity {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getString(R.string.progressdialog_loading_text));
         }
 
         mProgressDialog.show();

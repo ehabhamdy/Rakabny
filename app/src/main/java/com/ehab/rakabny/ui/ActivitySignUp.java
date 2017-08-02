@@ -37,7 +37,7 @@ public class ActivitySignUp extends ActivityBase {
 
     private ProgressDialog mProgressDialog;
 
-    String defaultLine = "Manshia : Asfra";
+    String defaultLine = getString(R.string.default_line_text);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +103,7 @@ public class ActivitySignUp extends ActivityBase {
                             FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.signup_failed_message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -112,14 +112,14 @@ public class ActivitySignUp extends ActivityBase {
     private boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(mEmailField.getText().toString())) {
-            mEmailField.setError("Required");
+            mEmailField.setError(getString(R.string.email_field_required_text));
             result = false;
         } else {
             mEmailField.setError(null);
         }
 
         if (TextUtils.isEmpty(mPasswordField.getText().toString())) {
-            mPasswordField.setError("Required");
+            mPasswordField.setError(getString(R.string.password_field_required_text));
             result = false;
         } else {
             mPasswordField.setError(null);

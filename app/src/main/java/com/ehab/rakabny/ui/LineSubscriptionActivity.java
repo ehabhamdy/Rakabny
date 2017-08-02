@@ -87,32 +87,27 @@ public class LineSubscriptionActivity extends AppCompatActivity {
                 // TODO: Change the path to read from the passenger node
                 mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
 
-                Toast.makeText(LineSubscriptionActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LineSubscriptionActivity.this, R.string.line_subscription_confirmed_message, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setCurrentLine(String line) {
-        switch(line){
-            case "Manshia : Asfra":
-                r1.setChecked(true);
-                break;
-            case "Manshia : Victoria":
-                r2.setChecked(true);
-                break;
-            case "Manshia : Mandra":
-                r3.setChecked(true);
-                break;
-            case "Asfra : Mahta":
-                r4.setChecked(true);
-                break;
-            case "Mandra : Mahta":
-                r5.setChecked(true);
-                break;
-            case "Mandra : Aboker":
-                r6.setChecked(true);
-                break;
+
+        if(line.equals(getString(R.string.manshia_asfra_line_label))){
+            r1.setChecked(true);
+        } else if (line.equals(getString(R.string.manshia_victoria_line_label))){
+            r2.setChecked(true);
+        } else if (line.equals(getString(R.string.manshia_mandra_line_label))){
+            r3.setChecked(true);
+        } else if(line.equals(getString(R.string.asfra_mahta_line_label))){
+            r4.setChecked(true);
+        } else if(line.equals(getString(R.string.mandra_mahta_line_label))){
+            r5.setChecked(true);
+        } else {
+            r6.setChecked(true);
         }
+
     }
 
     @Override
