@@ -27,7 +27,7 @@
             android:layout_marginBottom="25dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-thin"
-            android:text="How many tickets you want to buy?"
+            android:text="@string/tickets_purchase_hint_text"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -52,7 +52,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:fontFamily="sans-serif-thin"
-                android:text="Tickets "
+                android:text="@string/tickets_tv_text"
                 android:textColor="@color/md_black_1000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -67,7 +67,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Buy Now"
+            android:text="@string/buy_now_button_text"
             android:textAllCaps="false"
             android:textStyle="bold" />
 

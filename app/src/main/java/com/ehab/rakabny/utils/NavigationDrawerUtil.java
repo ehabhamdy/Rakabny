@@ -63,7 +63,7 @@ public class NavigationDrawerUtil {
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem main = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.nav_main_label).withIcon(R.drawable.ic_room_black_24dp);
         PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_subscribe_label).withIcon(R.drawable.ic_trending_up_black_24dp);
-        PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName("Buy Tickets").withIcon(R.drawable.ic_ticket_black_24dp);
+        PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_tickets_label).withIcon(R.drawable.ic_ticket_black_24dp);
         PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_profile_label).withIcon(R.drawable.ic_person_black_24dp);
         PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_logout_label).withIcon(R.drawable.ic_out_black_24dp);
         //create the drawer and remember the `Drawer` result object

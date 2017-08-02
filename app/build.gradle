@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'ehab_key'
+            keyPassword '1234'
+            storeFile file('$rootDir/ehab_keystore.jks')
+            storePassword '1234'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
@@ -19,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     packagingOptions {
@@ -27,16 +36,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile('com.mikepenz:materialdrawer:5.9.3@aar') {
         transitive = true
     }
-
-    compile group: 'com.pubnub', name: 'pubnub', version: '4.2.3'
+    compile 'com.pubnub:pubnub:4.2.3'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:design:25.4.0'
     compile 'com.google.android.gms:play-services-location:11.0.2'
@@ -49,7 +56,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.google.firebase:firebase-storage:11.0.2'
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
-
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 }

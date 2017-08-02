@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     // permission denied,
                     // Ask again for the permission
-                    Toast.makeText(this, "Location permission is mandatory for this application", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.location_permission_required_message, Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 return;
@@ -366,10 +366,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onMarkerClick(final Marker marker) {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title("Confirm Reservation")
-                .content("By confirming your reservation you will get a place in this bus")
-                .positiveText("yes")
-                .negativeText("no")
+                .title(R.string.reservation_dialog_title)
+                .content(R.string.reservation_dialog_body_text)
+                .positiveText(R.string.reservation_dialog_yes_button_text)
+                .negativeText(R.string.reservation_dialog_no_button_text)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -389,9 +389,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }else{
                             dialog.dismiss();
                             new MaterialDialog.Builder(MainActivity.this)
-                                    .title("You don't have tickets")
-                                    .content("Please purchase tickets and continue your reservation")
-                                    .positiveText("Ok")
+                                    .title(R.string.reservation_error_dialog_title)
+                                    .content(R.string.reservation_error_dialog_body_text)
+                                    .positiveText(R.string.reservation_error_dialog_dismiss_button_text)
                                     .show();
                         }
                     }

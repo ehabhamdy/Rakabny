@@ -49,7 +49,7 @@ public class TicketsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
-        tv.setText("Buy Tickets");
+        tv.setText(R.string.tickets_activity_title);
 
         Intent intent = getIntent();
 

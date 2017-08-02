@@ -65,7 +65,7 @@ public class LineSubscriptionActivity extends AppCompatActivity {
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
-        tv.setText("Subscribe to line");
+        tv.setText(R.string.subscription_activity_label);
 
         //drawerUtil = new NavigationDrawerUtil();
         //drawerUtil.SetupNavigationDrawer(mToolbar, LineSubscriptionActivity.this ,username, email);

@@ -46,21 +46,21 @@
                     android:id="@+id/username_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ehab Hamdy"
+                    android:text="@string/username_value_text"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="\@ehabhamdy"
+                    android:text="@string/ehabhamdy"
                     android:textColor="@android:color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="Mobile Developer"
+                    android:text="@string/mobile_developer"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                     android:layout_height="25dp"
                     android:layout_gravity="right"
                     android:background="@drawable/bg_btn"
-                    android:text="Change Photo"
+                    android:text="@string/change_photo_button_text"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white" />
 
@@ -97,7 +97,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="User Name"
+                android:text="@string/user_name_label_text"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email_label_text"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Tickets"
+                android:text="@string/tickets_label_text"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

@@ -46,7 +46,7 @@
             android:background="#ceffffff"
             android:elevation="10dp"
             android:onClick="openLineSubscription"
-            android:text="Select Line" />
+            android:text="@string/select_line_button_text" />
 
 
     </FrameLayout>
