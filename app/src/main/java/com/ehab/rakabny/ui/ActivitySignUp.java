@@ -37,7 +37,7 @@ public class ActivitySignUp extends ActivityBase {
 
     private ProgressDialog mProgressDialog;
 
-    String defaultLine = getString(R.string.default_line_text);
+    String defaultLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,8 @@ public class ActivitySignUp extends ActivityBase {
         mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        defaultLine = getString(R.string.default_line_text);
 
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
         tv.setText(R.string.signup_activity_title);

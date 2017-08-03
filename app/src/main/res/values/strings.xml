@@ -38,8 +38,8 @@
     <string name="mandra_aboker_line_label">Mandra : Aboker</string>
     <string name="select_line_button_text">Select Line</string>
     <string name="username_value_text">Ehab Hamdy</string>
-    <string name="ehabhamdy">name_value_text</string>
-    <string name="mobile_developer">info_value_text</string>
+    <string name="name_value_text">ehabhamdy</string>
+    <string name="career_text">Mobile Developer</string>
     <string name="change_photo_button_text">Change Photo</string>
     <string name="tickets_purchase_hint_text">How many tickets you want to buy?</string>
     <string name="tickets_tv_text">Tickets</string>
