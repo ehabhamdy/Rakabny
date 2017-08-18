@@ -67,4 +67,5 @@
     <string name="email_field_required_text">Required</string>
     <string name="password_field_required_text">Required</string>
     <string name="signup_failed_message">Sign Up Failed</string>
+    <string name="profile_activity_title">Profile</string>
 </resources>

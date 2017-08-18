@@ -26,17 +26,12 @@ import butterknife.ButterKnife;
 public class ProfileActivity extends AppCompatActivity {
     private static final int SELECT_PICTURE = 1;
 
-    @BindView(R.id.profile_image)
-    ImageView profileImageView;
 
     @BindView(R.id.profile_username_textview)
     TextView usernameTextview;
 
     @BindView(R.id.profile_email_textview)
     TextView emailTextview;
-
-    @BindView(R.id.select_image_button)
-    Button selectPhotoButton;
 
     @BindView(R.id.tickets_textview)
     TextView ticketsTextView;
@@ -60,62 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
         usernameTextview.setText(username);
         emailTextview.setText(email);
         ticketsTextView.setText(tickets);
-        selectPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,
-                        getString(R.string.photo_picker_title)) , SELECT_PICTURE);
-            }
-        });
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                String selectedImagePath = getPath(selectedImageUri);
-                profileImageView.setImageURI(selectedImageUri);
-                StorageReference storageRef = storage.getReference();
-                StorageReference riversRef = storageRef.child("ProfilePhotos/"+selectedImageUri.getLastPathSegment());
-                UploadTask uploadTask = riversRef.putFile(selectedImageUri);
-
-                // Register observers to listen for when the download is done or if it fails
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    }
-                });
-            }
-        }
-    }
-
-    /**
-     * helper to retrieve the path of an image URI
-     */
-    public String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if(cursor!=null)
-        {
-            //HERE YOU WILL GET A NULLPOINTER IF CURSOR IS NULL
-            //THIS CAN BE, IF YOU USED OI FILE MANAGER FOR PICKING THE MEDIA
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-        else return null;
+    public void backButtonPressed(View view){
+        this.finish();
     }
 
 }

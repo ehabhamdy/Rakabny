@@ -2,6 +2,8 @@ package com.ehab.rakabny.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -23,6 +25,8 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import java.util.Locale;
+
 /**
  * Created by ehabhamdy on 7/3/17.
  */
@@ -43,6 +47,10 @@ public class NavigationDrawerUtil {
     public Drawer SetupNavigationDrawer(Toolbar mToolbar, final Activity activity, final Passenger user) {
         // Create the AccountHeader
 
+        AssetManager am = activity.getApplicationContext().getAssets();
+
+        Typeface typeface = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "OpenSans-Regular.ttf"));
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
@@ -61,11 +69,11 @@ public class NavigationDrawerUtil {
         //new DrawerBuilder().withActivity(this).withAccountHeader(headerResult).build();
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
-        PrimaryDrawerItem main = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.nav_main_label).withIcon(R.drawable.ic_room_black_24dp);
-        PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_subscribe_label).withIcon(R.drawable.ic_trending_up_black_24dp);
-        PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_tickets_label).withIcon(R.drawable.ic_ticket_black_24dp);
-        PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_profile_label).withIcon(R.drawable.ic_person_black_24dp);
-        PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_logout_label).withIcon(R.drawable.ic_out_black_24dp);
+        PrimaryDrawerItem main = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.nav_main_label).withTypeface(typeface).withIcon(R.drawable.ic_room_black_24dp);
+        PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_subscribe_label).withTypeface(typeface).withIcon(R.drawable.ic_trending_up_black_24dp);
+        PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_tickets_label).withTypeface(typeface).withIcon(R.drawable.ic_ticket_black_24dp);
+        PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_profile_label).withTypeface(typeface).withIcon(R.drawable.ic_person_black_24dp);
+        PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_logout_label).withTypeface(typeface).withIcon(R.drawable.ic_out_black_24dp);
         //create the drawer and remember the `Drawer` result object
         drawer = new DrawerBuilder()
                 .withActivity(activity)
