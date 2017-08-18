@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f2f6"
     android:orientation="horizontal"
     tools:context=".ui.ActivityLogin">
 
@@ -26,51 +27,78 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editText"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_edt"
-                android:fontFamily="sans-serif"
-                android:hint="@string/email_hint"
-                android:inputType="textEmailAddress"
-                android:padding="10dp" />
+                android:layout_margin="15dp"
+                android:background="#fefefe"
+                android:elevation="4dp">
 
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_edt"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="@string/password_hint"
-                android:inputType="numberPassword"
-                android:padding="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <com.ehab.rakabny.customviews.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email Address"
+                        android:textColor="@color/primary_dark" />
+
+                    <EditText
+                        android:id="@+id/editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/email_hint"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp" />
+
+                    <com.ehab.rakabny.customviews.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Password"
+                        android:textColor="@color/primary_dark" />
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/password_hint"
+                        android:inputType="numberPassword"
+                        android:padding="10dp" />
+
+
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:id="@+id/sigupText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="20dp"
+                        android:text="@string/signup"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+            </FrameLayout>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:background="@drawable/bg_btn"
                 android:fontFamily="sans-serif"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="17dp" />
-
-            <TextView
-                android:id="@+id/sigupText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="40dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="@string/signup" />
 
         </LinearLayout>
     </ScrollView>

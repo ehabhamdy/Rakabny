@@ -9,17 +9,23 @@
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/app_title" />
-
-    <TextView
-        android:textColor="@color/white"
-        android:id="@+id/tickets_textview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"/>
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_title" />
+
+        <TextView
+            android:id="@+id/tickets_textview"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white" />
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>
