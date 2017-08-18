@@ -23,18 +23,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.instabug.library.core.ui.BaseContract;
+import com.steelkiwi.library.IncrementProductView;
+import com.steelkiwi.library.listener.OnStateListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TicketsActivity extends AppCompatActivity {
+    @BindView(R.id.login_toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.ticketCountsEditText)
-    EditText numberOfTicketsEditText;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
 
-    @BindView(R.id.buyConfirmationButton)
-    Button confirmationButton;
+    @BindView(R.id.productView)
+    IncrementProductView productView;
 
     private DatabaseReference mDatabase;
     int tickets;
@@ -43,13 +46,13 @@ public class TicketsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets);
-        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        ButterKnife.bind(this);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
-        tv.setText(R.string.tickets_activity_title);
+        toolbarTitle.setText(R.string.tickets_activity_title);
 
         Intent intent = getIntent();
 
@@ -75,7 +78,7 @@ public class TicketsActivity extends AppCompatActivity {
             });
         }
 
-        ButterKnife.bind(this);
+       /*
         confirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +94,31 @@ public class TicketsActivity extends AppCompatActivity {
                     editor.putInt(getString(R.string.tickets_number), Integer.parseInt(numberOfTickets) + tickets);
                     editor.commit();
                 }
+            }
+        });
+*/
+        productView.setOnStateListener(new OnStateListener() {
+            @Override
+            public void onCountChange(int count) {
+                Toast.makeText(TicketsActivity.this, "Yout are going to purchase "+ count + " Tickets", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onConfirm(int count) {
+                Toast.makeText(TicketsActivity.this, R.string.ticket_purchase_confirmed_message, Toast.LENGTH_SHORT).show();
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                //Toast.makeText(TicketsActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+                mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("numberOfTickets").setValue(count + tickets);
+
+                SharedPreferences sharedPref = TicketsActivity.this.getSharedPreferences(getString(R.string.ticket_pref_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt(getString(R.string.tickets_number), count + tickets);
+                editor.commit();
+            }
+
+            @Override
+            public void onClose() {
+
             }
         });
     }

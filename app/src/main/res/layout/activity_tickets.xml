@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#edf9ff">
 
     <LinearLayout
+        android:id="@+id/appbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
         tools:context="com.ehab.rakabny.ui.TicketsActivity">
 
@@ -20,57 +23,18 @@
             <include layout="@layout/login_toolbar" />
         </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
+        <com.steelkiwi.library.IncrementProductView
+            android:id="@+id/productView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-thin"
-            android:text="@string/tickets_purchase_hint_text"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/ticketCountsEditText"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:inputType="numberDecimal"
-                android:maxLength="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="sans-serif-thin"
-                android:text="@string/tickets_tv_text"
-                android:textColor="@color/md_black_1000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buyConfirmationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-thin"
-            android:text="@string/buy_now_button_text"
-            android:textAllCaps="false"
-            android:textStyle="bold" />
-
+            android:background="@android:color/transparent"
+            app:ipv_default_background_color="@color/colorPrimary"
+            app:ipv_highlight_background_color="#1eeafd"
+            app:ipv_middle_icon="@drawable/ic_ticket_black_24dp"
+            app:ipv_text_color="@android:color/white"
+            app:ipv_text_size="@dimen/text_size" />
     </LinearLayout>
 
     <LinearLayout
