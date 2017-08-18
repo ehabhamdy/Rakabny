@@ -8,76 +8,76 @@
     android:orientation="vertical"
     tools:context="com.ehab.rakabny.ui.ProfileActivity">
 
-<!--    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <LinearLayout
+    <!--    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="50dp">
-
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/default_thumbnail" />
-            </android.support.v7.widget.CardView>
-
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/username_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/username_value_text"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_value_text"
-                    android:textColor="@android:color/white" />
+                    <ImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/default_thumbnail" />
+                </android.support.v7.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/career_text"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/select_image_button"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_gravity="right"
-                    android:background="@drawable/bg_btn"
-                    android:text="@string/change_photo_button_text"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
 
+                    <TextView
+                        android:id="@+id/username_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/username_value_text"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_value_text"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/career_text"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/select_image_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/bg_btn"
+                        android:text="@string/change_photo_button_text"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>-->
+        </LinearLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -137,11 +137,17 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:fontFamily="sans-serif-thin"
-                tools:text="Ehab Hamdy"
-                android:textAlignment="center"
+                android:gravity="right"
+                android:paddingRight="30dp"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Ehab Hamdy" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,12 +171,17 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:fontFamily="sans-serif-thin"
-                tools:text="ehabhamdy2012@gmail.com"
-                android:textAlignment="center"
+                android:gravity="right"
+                android:paddingRight="30dp"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="ehabhamdy2012@gmail.com" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -194,12 +205,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:fontFamily="sans-serif-thin"
-                tools:text="0"
-                android:textAlignment="center"
+                android:gravity="right"
+                android:paddingRight="30dp"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="0" />
         </LinearLayout>
-
 
 
     </LinearLayout>

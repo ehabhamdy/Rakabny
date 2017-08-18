@@ -50,7 +50,7 @@ public class NavigationDrawerUtil {
         AssetManager am = activity.getApplicationContext().getAssets();
 
         Typeface typeface = Typeface.createFromAsset(am,
-                String.format(Locale.US, "fonts/%s", "OpenSans-Regular.ttf"));
+                String.format(Locale.US, "fonts/%s", "OpenSans-Semibold.ttf"));
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
