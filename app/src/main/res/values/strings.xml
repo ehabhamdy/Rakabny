@@ -22,8 +22,8 @@
     <string name="tickets_number">tickets</string>
     <string name="reservation_dialog_title">Confirm Reservation</string>
     <string name="reservation_dialog_body_text">By confirming your reservation you will get a place in this bus</string>
-    <string name="reservation_dialog_yes_button_text">yes</string>
-    <string name="reservation_dialog_no_button_text">no</string>
+    <string name="reservation_dialog_yes_button_text">Yes</string>
+    <string name="reservation_dialog_no_button_text">No</string>
     <string name="reservation_error_dialog_title">You don\'t have tickets</string>
     <string name="reservation_error_dialog_body_text">Please purchase tickets and continue your reservation</string>
     <string name="reservation_error_dialog_dismiss_button_text">Ok</string>
@@ -68,4 +68,7 @@
     <string name="password_field_required_text">Required</string>
     <string name="signup_failed_message">Sign Up Failed</string>
     <string name="profile_activity_title">Profile</string>
+    <string name="reservation_completed_dialog_title">Reserved</string>
+    <string name="reservation_completed_dialog_content_text">You now have a place, just watch the street!</string>
+    <string name="done_label_text">Done</string>
 </resources>

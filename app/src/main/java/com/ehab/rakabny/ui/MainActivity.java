@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.ehab.rakabny.BuildConfig;
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
@@ -57,6 +55,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -365,14 +364,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title(R.string.reservation_dialog_title)
-                .content(R.string.reservation_dialog_body_text)
-                .positiveText(R.string.reservation_dialog_yes_button_text)
-                .negativeText(R.string.reservation_dialog_no_button_text)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getResources().getString(R.string.reservation_dialog_title))
+                .setContentText(getResources().getString(R.string.reservation_dialog_body_text))
+                .setConfirmText(getResources().getString(R.string.reservation_dialog_yes_button_text))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(SweetAlertDialog sDialog) {
 
                         if(tickets > 0) {
                             //Charge one ticket from the user
@@ -385,18 +384,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Ticket t = new Ticket(username, key,FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
                             String bus = marker.getTitle();
                             mFirebaseDatabase.getReference().child("reservations").child(bus.substring(0, bus.length() - 2)).child(key).setValue(t);
+                            sDialog
+                                    .setTitleText(getString(R.string.reservation_completed_dialog_title))
+                                    .setContentText(getString(R.string.reservation_completed_dialog_content_text))
+                                    .setConfirmText(getString(R.string.done_label_text))
+                                    .setConfirmClickListener(null)
+                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
 
                         }else{
-                            dialog.dismiss();
-                            new MaterialDialog.Builder(MainActivity.this)
-                                    .title(R.string.reservation_error_dialog_title)
-                                    .content(R.string.reservation_error_dialog_body_text)
-                                    .positiveText(R.string.reservation_error_dialog_dismiss_button_text)
-                                    .show();
+                            sDialog
+                                    .setTitleText(getResources().getString(R.string.reservation_error_dialog_title))
+                                    .setContentText(getResources().getString(R.string.reservation_error_dialog_body_text))
+                                    .setConfirmText(getString(R.string.done_label_text))
+                                    .setConfirmClickListener(null)
+                                    .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                         }
+                    }
+
+                })
+                .setCancelText(getResources().getString(R.string.reservation_dialog_no_button_text))
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismiss();
                     }
                 })
                 .show();
+
         return false;
     }
 }

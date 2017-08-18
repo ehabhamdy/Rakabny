@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ehab.rakabny">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -8,10 +9,11 @@
     <application
         android:name=".RakkebneyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/app_icon"
+        android:icon="@mipmap/application_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="icon, label">
         <activity android:name=".ui.ActivityLogin" />
         <activity android:name=".ui.ActivitySignUp" />
         <activity
@@ -33,19 +35,21 @@
             android:name=".ui.LineSubscriptionActivity"
             android:parentActivityName=".ui.MainActivity" />
         <activity android:name=".ui.ProfileActivity" />
-        <activity android:name=".ui.TicketsActivity"
+        <activity
+            android:name=".ui.TicketsActivity"
             android:parentActivityName=".ui.MainActivity"></activity>
 
 
         <receiver
             android:name=".widget.RWidgetProvider"
-            android:label="@string/title_widget_info"
-            android:enabled="true" >
+            android:enabled="true"
+            android:label="@string/title_widget_info">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_user" />
         </receiver>
 
