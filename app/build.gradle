@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'key_ehab'
-            keyPassword '123456'
+            keyAlias 'ehab_key'
+            keyPassword 'mmtttmm1234'
             storeFile file("$rootDir/ehab_keystore.jks")
-            storePassword '123456'
+            storePassword 'mmtttmm1234'
         }
     }
     compileSdkVersion 25

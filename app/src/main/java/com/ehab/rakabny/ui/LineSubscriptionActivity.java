@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +21,9 @@ import com.ehab.rakabny.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static cn.pedant.SweetAlert.SweetAlertDialog.*;
 
 public class LineSubscriptionActivity extends AppCompatActivity {
 
@@ -62,47 +66,73 @@ public class LineSubscriptionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
         tv.setText(R.string.subscription_activity_label);
 
         //drawerUtil = new NavigationDrawerUtil();
         //drawerUtil.SetupNavigationDrawer(mToolbar, LineSubscriptionActivity.this ,username, email);
         Intent intent = getIntent();
-        String line = intent.getStringExtra(NavigationDrawerUtil.SUB_LINE_EXTRA);
+        final String line = intent.getStringExtra(NavigationDrawerUtil.SUB_LINE_EXTRA);
 
         setCurrentLine(line);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int selectedId = linesGroup.getCheckedRadioButtonId();
+                final int selectedId = linesGroup.getCheckedRadioButtonId();
 
-                // find the radiobutton by returned id
-                RadioButton selectedLineRadio = (RadioButton) findViewById(selectedId);
+                new SweetAlertDialog(LineSubscriptionActivity.this, WARNING_TYPE)
+                        .setTitleText(getString(R.string.linechange_dialog_title))
+                        .setContentText(getString(R.string.linechange_dialog_body))
+                        .setConfirmText(getResources().getString(R.string.reservation_dialog_yes_button_text))
+                        .setConfirmClickListener(new OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
 
-                mDatabase = FirebaseDatabase.getInstance().getReference();
+                                // find the radiobutton by returned id
+                                RadioButton selectedLineRadio = (RadioButton) findViewById(selectedId);
 
-                // TODO: Change the path to read from the passenger node
-                mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
+                                mDatabase = FirebaseDatabase.getInstance().getReference();
 
-                Toast.makeText(LineSubscriptionActivity.this, R.string.line_subscription_confirmed_message, Toast.LENGTH_SHORT).show();
+                                // TODO: Change the path to read from the passenger node
+                                mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
+
+
+
+                                sDialog
+                                        .setTitleText(getString(R.string.reservation_completed_dialog_title))
+                                        .setContentText(getString(R.string.reservation_completed_dialog_content_text))
+                                        .setConfirmText(getString(R.string.done_label_text))
+                                        .setConfirmClickListener(null)
+                                        .changeAlertType(SUCCESS_TYPE);
+
+                            }
+
+                        })
+                        .setCancelText(getResources().getString(R.string.reservation_dialog_no_button_text))
+                        .setCancelClickListener(new OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                setCurrentLine(line);
+                                sDialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
     }
 
     private void setCurrentLine(String line) {
 
-        if(line.equals(getString(R.string.manshia_asfra_line_label))){
+        if (line.equals(getString(R.string.manshia_asfra_line_label))) {
             r1.setChecked(true);
-        } else if (line.equals(getString(R.string.manshia_victoria_line_label))){
+        } else if (line.equals(getString(R.string.manshia_victoria_line_label))) {
             r2.setChecked(true);
-        } else if (line.equals(getString(R.string.manshia_mandra_line_label))){
+        } else if (line.equals(getString(R.string.manshia_mandra_line_label))) {
             r3.setChecked(true);
-        } else if(line.equals(getString(R.string.asfra_mahta_line_label))){
+        } else if (line.equals(getString(R.string.asfra_mahta_line_label))) {
             r4.setChecked(true);
-        } else if(line.equals(getString(R.string.mandra_mahta_line_label))){
+        } else if (line.equals(getString(R.string.mandra_mahta_line_label))) {
             r5.setChecked(true);
         } else {
             r6.setChecked(true);
