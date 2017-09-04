@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'ehab_key'
-            keyPassword 'mmtttmm1234'
-            storeFile file("$rootDir/ehab_keystore.jks")
-            storePassword 'mmtttmm1234'
+            keyPassword '123456'
+            storeFile file("$rootDir/ehab_key.jks")
+            storePassword '123456'
         }
     }
     compileSdkVersion 25
