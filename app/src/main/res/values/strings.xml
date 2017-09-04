@@ -73,4 +73,5 @@
     <string name="done_label_text">Done</string>
     <string name="linechange_dialog_title">Confirm Line Change</string>
     <string name="linechange_dialog_body">Are you sure you want to subscrip to this line?</string>
+    <string name="nav_match_res_label">Reserve Matches</string>
 </resources>
