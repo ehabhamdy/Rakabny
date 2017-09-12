@@ -3,7 +3,6 @@ package com.ehab.rakabny.ui;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -104,18 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user != null) {
             if (user.isEmailVerified()) {
 
-                setContentView(R.layout.activity_main);
-                ButterKnife.bind(MainActivity.this);
-
-                mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-                setSupportActionBar(mToolbar);
-                getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-
-                mapFragment.getMapAsync(MainActivity.this);
-
+                activityUISetup();
 
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -123,32 +111,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 // addValueEventListener will always listen for changes so if the user update his profile or
                 // change subscription line every thing will be updated properly in thins activity
-                mPassengersReference.child(userId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Passenger user = dataSnapshot.getValue(Passenger.class);
-                        /*email = user.email;*/
-                        username = user.username;
-                        tickets = user.numberOfTickets;
-                        lineChannelSubscription = user.line;
 
-                        ticketsTextView.setText("          "+tickets +" "+ getString(R.string.tickets_text1_text)) ;
+                ValueEventListener userInformationListener = createUserInformationListner();
 
-                        lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
-                        busMarkers.clear();
-                        mMap.clear();
-
-                        initPubNub();
-                        drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this, user);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-
-                });
+                mPassengersReference.child(userId).addValueEventListener(userInformationListener);
 
                 new DrawerBuilder().withActivity(this).withToolbar(mToolbar).build();
 
@@ -160,6 +126,49 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             openLoginActivity();
         }
     }
+
+    private void activityUISetup() {
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(MainActivity.this);
+        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(MainActivity.this);
+    }
+
+
+    private ValueEventListener createUserInformationListner() {
+        return new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Passenger user = dataSnapshot.getValue(Passenger.class);
+                        /*email = user.email;*/
+                username = user.username;
+                tickets = user.numberOfTickets;
+                lineChannelSubscription = user.line;
+
+                ticketsTextView.setText("          " + tickets + " " + getString(R.string.tickets_text1_text));
+
+                lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
+                busMarkers.clear();
+                mMap.clear();
+
+                initPubNub();
+                drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this, user);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
+    }
+
 
     private void openLoginActivity() {
         Intent intent = new Intent(this, ActivityLogin.class);
@@ -244,7 +253,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         config.setPublishKey(PUBLISH_KEY);
         config.setSubscribeKey(SUBSCRIBE_KEY);
         config.setSecure(true);
-
 
         this.mPubNub = new PubNub(config);
 
@@ -373,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
 
-                        if(tickets > 0) {
+                        if (tickets > 0) {
                             //Charge one ticket from the user
                             tickets--;
 
@@ -381,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             //store reservation in the database
                             String key = mFirebaseDatabase.getReference().child("reservations").push().getKey();
-                            Ticket t = new Ticket(username, key,FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
+                            Ticket t = new Ticket(username, key, FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
                             String bus = marker.getTitle();
                             mFirebaseDatabase.getReference().child("reservations").child(bus.substring(0, bus.length() - 2)).child(key).setValue(t);
                             sDialog
@@ -391,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                     .setConfirmClickListener(null)
                                     .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
 
-                        }else{
+                        } else {
                             sDialog
                                     .setTitleText(getResources().getString(R.string.reservation_error_dialog_title))
                                     .setContentText(getResources().getString(R.string.reservation_error_dialog_body_text))
