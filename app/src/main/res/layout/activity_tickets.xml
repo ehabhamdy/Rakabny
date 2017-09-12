@@ -14,10 +14,9 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/appbar_padding_top">
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/login_toolbar" />
+            <include layout="@layout/common_toolbar" />
         </android.support.design.widget.AppBarLayout>
 
         <TextView

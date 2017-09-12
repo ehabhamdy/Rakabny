@@ -61,7 +61,7 @@ public class LineSubscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_subscription);
         ButterKnife.bind(this);
-        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.common_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

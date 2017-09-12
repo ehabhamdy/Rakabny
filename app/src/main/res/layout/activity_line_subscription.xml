@@ -14,7 +14,7 @@
         android:background="?attr/colorPrimary"
         android:paddingTop="@dimen/appbar_padding_top">
 
-        <include layout="@layout/login_toolbar" />
+        <include layout="@layout/common_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

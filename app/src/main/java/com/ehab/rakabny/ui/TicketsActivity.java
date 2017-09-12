@@ -43,7 +43,7 @@ public class TicketsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets);
-        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.common_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

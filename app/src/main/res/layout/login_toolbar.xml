@@ -3,27 +3,29 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="?attr/colorPrimary">
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingBottom="7dp">
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/toobar_icon"/>
+            android:src="@drawable/toobar_icon" />
+
         <com.ehab.rakabny.customviews.TextViewLight
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:paddingLeft="40dp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

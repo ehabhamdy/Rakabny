@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
-import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.ui.ActivityLogin;
 import com.ehab.rakabny.ui.EventsActivity;
 import com.ehab.rakabny.ui.LineSubscriptionActivity;
@@ -73,7 +72,7 @@ public class NavigationDrawerUtil {
         PrimaryDrawerItem main = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.nav_main_label).withTypeface(typeface).withIcon(R.drawable.ic_room_black_24dp);
         PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_subscribe_label).withTypeface(typeface).withIcon(R.drawable.ic_trending_up_black_24dp);
         PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_tickets_label).withTypeface(typeface).withIcon(R.drawable.ic_ticket_black_24dp);
-        PrimaryDrawerItem matchReservation = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_match_res_label).withTypeface(typeface).withIcon(R.drawable.ic_ticket_black_24dp);
+        PrimaryDrawerItem matchReservation = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_current_events_label).withTypeface(typeface).withIcon(R.drawable.football);
         PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_profile_label).withTypeface(typeface).withIcon(R.drawable.ic_person_black_24dp);
         PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_logout_label).withTypeface(typeface).withIcon(R.drawable.ic_out_black_24dp);
         //create the drawer and remember the `Drawer` result object

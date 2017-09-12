@@ -42,9 +42,10 @@ public class EventsActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.common_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
         tv.setText("Current Events");

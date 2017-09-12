@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         tickets = user.numberOfTickets;
                         lineChannelSubscription = user.line;
 
-                        ticketsTextView.setText("           "+tickets + getString(R.string.tickets_text1_text)) ;
+                        ticketsTextView.setText("          "+tickets +" "+ getString(R.string.tickets_text1_text)) ;
 
                         lineTextView.setText(getResources().getString(R.string.current_line_textview_text) + " " + user.line);
                         busMarkers.clear();
