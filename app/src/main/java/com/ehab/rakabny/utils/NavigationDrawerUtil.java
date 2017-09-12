@@ -11,8 +11,8 @@ import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
 import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.ui.ActivityLogin;
+import com.ehab.rakabny.ui.EventsActivity;
 import com.ehab.rakabny.ui.LineSubscriptionActivity;
-import com.ehab.rakabny.ui.MatchReservationActivity;
 import com.ehab.rakabny.ui.ProfileActivity;
 import com.ehab.rakabny.ui.TicketsActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -114,7 +114,7 @@ public class NavigationDrawerUtil {
                                 drawer.closeDrawer();
                                 return true;
                             case 7:
-                                Intent openMatchResIntent = new Intent(activity.getApplicationContext(), MatchReservationActivity.class);
+                                Intent openMatchResIntent = new Intent(activity.getApplicationContext(), EventsActivity.class);
                                 activity.startActivity(openMatchResIntent);
                                 drawer.closeDrawer();
                                 return true;
