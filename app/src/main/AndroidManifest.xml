@@ -37,8 +37,7 @@
         <activity android:name=".ui.ProfileActivity" />
         <activity
             android:name=".ui.TicketsActivity"
-            android:parentActivityName=".ui.MainActivity"></activity>
-
+            android:parentActivityName=".ui.MainActivity" />
 
         <receiver
             android:name=".widget.RWidgetProvider"
@@ -48,11 +47,14 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_user" />
         </receiver>
 
+        <activity android:name=".ui.EventsActivity"
+            android:parentActivityName=".ui.MainActivity"></activity>
     </application>
 
 </manifest>
