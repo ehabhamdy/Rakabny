@@ -16,6 +16,7 @@ import com.ehab.rakabny.R;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -35,6 +36,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.tickets_textview)
     TextView ticketsTextView;
+
+    @BindView(R.id.logout_button)
+    Button logoutButton;
 
     FirebaseStorage storage;
 
@@ -56,6 +60,17 @@ public class ProfileActivity extends AppCompatActivity {
         emailTextview.setText(email);
         ticketsTextView.setText(tickets);
 
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void backButtonPressed(View view){

@@ -74,4 +74,6 @@
     <string name="linechange_dialog_title">Confirm Line Change</string>
     <string name="linechange_dialog_body">Are you sure you want to subscrip to this line?</string>
     <string name="nav_current_events_label">Current Events</string>
+    <string name="menu_logout">Logout</string>
+
 </resources>
