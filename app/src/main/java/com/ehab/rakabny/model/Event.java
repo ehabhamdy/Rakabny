@@ -9,4 +9,5 @@ public class Event {
     public String description;
     public int price;
     public String posterUrl;
+    public String status;
 }

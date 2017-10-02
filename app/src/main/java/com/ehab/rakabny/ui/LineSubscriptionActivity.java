@@ -100,10 +100,7 @@ public class LineSubscriptionActivity extends AppCompatActivity {
 
 
                                 sDialog
-                                        .setTitleText(getString(R.string.reservation_completed_dialog_title))
-                                        .setContentText(getString(R.string.reservation_completed_dialog_content_text))
-                                        .setConfirmText(getString(R.string.done_label_text))
-                                        .setConfirmClickListener(null)
+
                                         .changeAlertType(SUCCESS_TYPE);
 
                             }
