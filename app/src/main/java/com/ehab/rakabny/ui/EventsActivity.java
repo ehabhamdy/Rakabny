@@ -1,6 +1,7 @@
 package com.ehab.rakabny.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,9 +27,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsActivity extends ActivityBase {
+public class EventsActivity extends ActivityBase implements EventOnClickListener {
 
     private static final String TAG = "Message";
+    public static final String EXTRA_EVENT_DETAILS = "event";
     private FirebaseDatabase mDatabase;
     private DatabaseReference mEventsReference;
     private RecyclerView mEventsRecycler;
@@ -62,33 +64,27 @@ public class EventsActivity extends ActivityBase {
         mEventsRecycler.setAdapter(mAdapter);
     }
 
-    private static class EventViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView titleView;
-        public  TextView descriptionView;
-        public ImageView posterImageView;
-        public TextView priceTextView;
-
-        public EventViewHolder(View itemView) {
-            super(itemView);
-
-            titleView = (TextView) itemView.findViewById(R.id.event_name_textview);
-            descriptionView = (TextView) itemView.findViewById(R.id.description_textview);
-            posterImageView = (ImageView) itemView.findViewById(R.id.poster_imageview);
-            priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
-        }
+    @Override
+    public void onListItemClick(Event event) {
+        Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
+        intent.putExtra(EXTRA_EVENT_DETAILS, event);
+        startActivity(intent);
     }
 
-    private static class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
+
+    private static class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
 
         private Context mContext;
         private DatabaseReference mDatabaseReference;
         private ChildEventListener mChildEventListener;
 
+        final private EventOnClickListener mOnClickListener;
+
         private List<String> mEventIds = new ArrayList<>();
         private List<Event> mEvents = new ArrayList<>();
 
-        public EventsAdapter(final Context context, DatabaseReference ref) {
+        public EventsAdapter(final EventsActivity context, DatabaseReference ref) {
+            mOnClickListener = context;
             mContext = context;
             mDatabaseReference = ref;
 
@@ -115,9 +111,7 @@ public class EventsActivity extends ActivityBase {
                     int orderIndex = mEventIds.indexOf(commentKey);
                     if (orderIndex > -1) {
                         // Replace with the new data
-                        String status = newEvent.status;
-                        if(status == "current")
-                            mEvents.set(orderIndex, newEvent);
+                        mEvents.set(orderIndex, newEvent);
 
                         // Update the RecyclerView
                         notifyItemChanged(orderIndex);
@@ -190,6 +184,32 @@ public class EventsActivity extends ActivityBase {
                 mDatabaseReference.removeEventListener(mChildEventListener);
             }
         }
+
+        public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+            public TextView titleView;
+            public TextView descriptionView;
+            public ImageView posterImageView;
+            public TextView priceTextView;
+
+            public EventViewHolder(View itemView) {
+                super(itemView);
+
+                titleView = (TextView) itemView.findViewById(R.id.event_name_textview);
+                descriptionView = (TextView) itemView.findViewById(R.id.description_textview);
+                posterImageView = (ImageView) itemView.findViewById(R.id.poster_imageview);
+                priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
+                itemView.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View v) {
+                int clickPosition = getAdapterPosition();
+                Event clickedEvent = mEvents.get(clickPosition);
+                mOnClickListener.onListItemClick(clickedEvent);
+            }
+        }
+
 
     }
 }

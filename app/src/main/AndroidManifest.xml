@@ -53,8 +53,10 @@
                 android:resource="@xml/widget_info_user" />
         </receiver>
 
-        <activity android:name=".ui.EventsActivity"
-            android:parentActivityName=".ui.MainActivity"></activity>
+        <activity
+            android:name=".ui.EventsActivity"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity android:name=".ui.EventDetailsActivity"></activity>
     </application>
 
 </manifest>
