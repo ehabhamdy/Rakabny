@@ -9,11 +9,10 @@ import android.view.View;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
-import com.ehab.rakabny.ui.ActivityLogin;
+import com.ehab.rakabny.ui.LoginActivity;
 import com.ehab.rakabny.ui.EventsActivity;
 import com.ehab.rakabny.ui.LineSubscriptionActivity;
 import com.ehab.rakabny.ui.ProfileActivity;
-import com.ehab.rakabny.ui.TicketsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -127,7 +126,7 @@ public class NavigationDrawerUtil {
                                 return true;
                             case 9:
                                 FirebaseAuth.getInstance().signOut();
-                                Intent intent = new Intent(activity.getApplicationContext(), ActivityLogin.class);
+                                Intent intent = new Intent(activity.getApplicationContext(), LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 activity.startActivity(intent);

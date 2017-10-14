@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by Ehab on 10/22/2016.
  */
 
-public class ActivityBase extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
     Toolbar mToolbar;

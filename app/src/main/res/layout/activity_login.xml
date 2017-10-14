@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#f1f2f6"
     android:orientation="horizontal"
-    tools:context=".ui.ActivityLogin">
+    tools:context=".ui.LoginActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

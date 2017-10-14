@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void openLoginActivity() {
-        Intent intent = new Intent(this, ActivityLogin.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         //Removing HomeActivity from the back stack
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()) {
             case R.id.bookmark_menu:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

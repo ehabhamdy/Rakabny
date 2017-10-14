@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsActivity extends ActivityBase implements EventOnClickListener {
+public class EventsActivity extends BaseActivity implements EventOnClickListener {
 
     private static final String TAG = "Message";
     public static final String EXTRA_EVENT_DETAILS = "event";
@@ -167,11 +167,11 @@ public class EventsActivity extends ActivityBase implements EventOnClickListener
 
         @Override
         public void onBindViewHolder(EventViewHolder holder, int position) {
-            Event order = mEvents.get(position);
-            holder.titleView.setText(order.name);
-            holder.descriptionView.setText(order.description);
-            holder.priceTextView.setText(Integer.toString(order.price));
-            Picasso.with(mContext).load(order.posterUrl).into(holder.posterImageView);
+            Event event = mEvents.get(position);
+            holder.titleView.setText(event.name);
+            holder.descriptionView.setText(event.description);
+            holder.priceTextView.setText(Integer.toString(event.price));
+            Picasso.with(mContext).load(event.posterUrl).into(holder.posterImageView);
         }
 
         @Override

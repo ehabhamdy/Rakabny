@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
-        <activity android:name=".ui.ActivityLogin" />
-        <activity android:name=".ui.ActivitySignUp" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.SignUpActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTop"

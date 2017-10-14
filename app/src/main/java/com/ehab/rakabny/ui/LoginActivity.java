@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class ActivityLogin extends ActivityBase {
+public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "Message";
     protected TextView mSignUpTextView;
@@ -50,7 +50,7 @@ public class ActivityLogin extends ActivityBase {
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityLogin.this, ActivitySignUp.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class ActivityLogin extends ActivityBase {
                     String p = mPasswordField.getText().toString();
                     login(e, p);
                 } else {
-                    Toast.makeText(ActivityLogin.this, R.string.connection_error_message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.connection_error_message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -99,7 +99,7 @@ public class ActivityLogin extends ActivityBase {
 
                         if (task.isSuccessful() && mAuth.getCurrentUser().isEmailVerified()) {
 
-                            Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -107,11 +107,11 @@ public class ActivityLogin extends ActivityBase {
                         } else {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             if (mAuth.getCurrentUser() != null && !mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(ActivityLogin.this, R.string.authentication_failed_message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, R.string.authentication_failed_message, Toast.LENGTH_SHORT).show();
                                 FirebaseAuth.getInstance().signOut();
 
                             } else {
-                                Toast.makeText(ActivityLogin.this, R.string.authentication_error_message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, R.string.authentication_error_message, Toast.LENGTH_SHORT).show();
                             }
                         }
 

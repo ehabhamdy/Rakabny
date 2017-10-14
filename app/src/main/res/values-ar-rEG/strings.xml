@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ركيبني</string>
+
+    <string name="password_hint">كلمه السر</string>
+    <string name="username_hint">اسم المستخدم</string>
+    <string name="email_hint">البريد الالكتروني</string>
+    <string name="signup">سجل حساب جديد</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="sign_up_hint">تسجل حساب جديد</string>
+    <string name="signup_activity_title">تسجيل حساب جديد</string>
+    <string name="login_activity_title">تسجيل دخول</string>
+
+    <string name="nav_main_label">الرئيسيه</string>
+    <string name="nav_subscribe_label">تابع طريق</string>
+    <string name="nav_profile_label">الملف الشخصي</string>
+    <string name="nav_settings_label">الاعدادات</string>
+    <string name="nav_logout_label">تسجيل خروج</string>
+    <string name="current_line_textview_text">Your current Line is:</string>
+    <string name="title_widget_info">"ركيبني "</string>
+    <string name="ticket_purchase_tip">After purchasing successsfully completed you can follow buses on the Map and reserve them</string>
+    <string name="line_selection_tip">Changing you line subscription will make your vehicle to the passenger in your newly selected route</string>
+    <string name="tickets_number">التذاكر</string>
+    <string name="reservation_dialog_title">تاكيد الحجز</string>
+    <string name="reservation_dialog_body_text">By confirming your reservation you will get a place in this bus</string>
+    <string name="reservation_dialog_yes_button_text">نعم</string>
+    <string name="reservation_dialog_no_button_text">لا</string>
+    <string name="reservation_error_dialog_title">You don\'t have tickets</string>
+    <string name="reservation_error_dialog_body_text">Please purchase tickets and continue your reservation</string>
+    <string name="reservation_error_dialog_dismiss_button_text">تم</string>
+    <string name="location_permission_required_message">Location permission is mandatory for this application</string>
+    <string name="tickets_activity_title">شراء التذاكر</string>
+    <string name="nav_tickets_label">Buy Tickets</string>
+    <string name="manshia_asfra_line_label">Manshia : Asfra</string>
+    <string name="manshia_victoria_line_label">المنشيه : فيكتوريا</string>
+    <string name="manshia_mandra_line_label">المنشيه : المندره</string>
+    <string name="asfra_mahta_line_label">العصافره : المحطه</string>
+    <string name="mandra_mahta_line_label">المندره : المحطه</string>
+    <string name="mandra_aboker_line_label">المندره : ابو قير</string>
+    <string name="select_line_button_text">اختار الخط</string>
+    <string name="username_value_text">Ehab Hamdy</string>
+    <string name="name_value_text">ehabhamdy</string>
+    <string name="career_text">Mobile Developer</string>
+    <string name="change_photo_button_text">Change Photo</string>
+    <string name="tickets_purchase_hint_text">How many tickets you want to buy?</string>
+    <string name="tickets_tv_text">التذاكر</string>
+    <string name="buy_now_button_text">اشتري الان</string>
+    <string name="widget_text1_text">لديك</string>
+    <string name="tickets_widget_text2_text">التذاكر</string>
+    <string name="buy_now_widget_button_text">اشتري الان</string>
+    <string name="line_confirm_button_text">اكيد التغيير</string>
+    <string name="user_name_label_text">اسم المستخدم</string>
+    <string name="email_label_text">البريد الالكتروني</string>
+    <string name="tickets_label_text">التذاكر</string>
+    <string name="subscription_activity_label">Subscribe to line</string>
+    <string name="connection_error_message">لا يوجد اتصال بالانترنت</string>
+    <string name="authentication_error_message">يوجد خطا في كلمه السر او البريد</string>
+    <string name="signup_feedback_message">من فضلك توجه الي البريد الالكتروني الخاص بك لاستلام رساله التاكيد</string>
+    <string name="progressbar_loading_message">جاري التحميل...</string>
+    <string name="photo_picker_title">Select Picture</string>
+    <string name="ticket_purchase_confirmed_message">تم التاكيد</string>
+    <string name="ticket_pref_key">ehab</string>
+    <string name="line_subscription_confirmed_message">تم التاكيد</string>
+    <string name="authentication_failed_message">خطا من فضلك قم بتاكيد عنوان البريدالبريد الالكتروني قبل اول محاوله دخول</string>
+    <string name="tickets_text1_text">التذاكر</string>
+    <string name="default_line_text">المنشيه : العصافره</string>
+    <string name="progressdialog_loading_text">جاري التحميل...</string>
+    <string name="email_field_required_text">مطلوب</string>
+    <string name="password_field_required_text">مطلوب</string>
+    <string name="signup_failed_message">خطا لم يتم تسجيل حساب المستخدم</string>
+    <string name="profile_activity_title">الملف الشخصي</string>
+    <string name="reservation_completed_dialog_title">تم الحجز</string>
+    <string name="reservation_completed_dialog_content_text">دلوقتي انت حجزت في المشروع من فضلك تابع الطريق</string>
+    <string name="done_label_text">تم</string>
+    <string name="linechange_dialog_title">تاكيد تغيير الخط</string>
+    <string name="linechange_dialog_body">من فضلك اكد رغبتك في تغيير الخط</string>
+    <string name="nav_current_events_label">الرحلات الحاليه</string>
+    <string name="menu_logout">تسجيل خروج</string>
+    <string name="first_name_hint">الاسم الاول</string>
+    <string name="last_name_hint">الاسم الاخير</string>
+    <string name="phone_number_hint">رقم الهاتف</string>
+    <string name="number_of_seats_hint">عدد الكراسي</string>
+    <string name="register_event_button_label">تسجيل الان</string>
+    <string name="event_registration_tip">للدفع والاستعلام 01141943416 -  01280527683</string>
+
+
+</resources>

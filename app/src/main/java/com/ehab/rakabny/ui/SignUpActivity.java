@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ActivitySignUp extends ActivityBase {
+public class SignUpActivity extends BaseActivity {
 
 
     private static final String TAG = "Message";
@@ -143,7 +143,7 @@ public class ActivitySignUp extends ActivityBase {
 //        startActivity(intent);
 
         Toast.makeText(getApplicationContext(), R.string.signup_feedback_message, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, ActivityLogin.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

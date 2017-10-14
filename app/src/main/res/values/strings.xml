@@ -75,5 +75,11 @@
     <string name="linechange_dialog_body">Are you sure you want to subscrip to this line?</string>
     <string name="nav_current_events_label">Current Events</string>
     <string name="menu_logout">Logout</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="number_of_seats_hint">Number of Seats</string>
+    <string name="register_event_button_label">Register</string>
+    <string name="event_registration_tip">For payment and inquiries 01141943416 -  01280527683</string>
 
 </resources>
