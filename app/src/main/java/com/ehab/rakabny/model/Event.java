@@ -13,6 +13,7 @@ public class Event implements Parcelable {
     public String description;
     public int price;
     public String posterUrl;
+    public String bannerUrl;
     public String status;
 
     public Event(){
@@ -24,6 +25,7 @@ public class Event implements Parcelable {
         price = in.readInt();
         posterUrl = in.readString();
         status = in.readString();
+        bannerUrl = in.readString();
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -50,5 +52,6 @@ public class Event implements Parcelable {
         dest.writeInt(price);
         dest.writeString(posterUrl);
         dest.writeString(status);
+        dest.writeString(bannerUrl);
     }
 }

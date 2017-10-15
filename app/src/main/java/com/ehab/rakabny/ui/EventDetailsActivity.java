@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ehab.rakabny.R;
@@ -15,6 +16,7 @@ import com.ehab.rakabny.model.Event;
 import com.ehab.rakabny.model.EventRegistrationInformation;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -30,6 +32,9 @@ public class EventDetailsActivity extends BaseActivity {
     private Toolbar mToolbar;
 
     private String eventTitle;
+
+    @BindView(R.id.poster_imageview)
+    ImageView posterImageView;
 
     @BindView(R.id.first_name_edittext)
     EditText firstNameEditText;
@@ -72,7 +77,9 @@ public class EventDetailsActivity extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         Event event = bundle.getParcelable(EventsActivity.EXTRA_EVENT_DETAILS);
-        eventTitle = event.name;
+        Picasso.with(this).load(event.bannerUrl).into(posterImageView);
+
+        Toast.makeText(this, event.name, Toast.LENGTH_SHORT).show();
 
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference();

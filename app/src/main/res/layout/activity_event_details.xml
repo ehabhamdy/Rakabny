@@ -30,72 +30,258 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@+id/getStartedButton"
+                <ImageView
+                    android:id="@+id/poster_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:clickable="true"
+                    android:scaleType="fitXY"
+                    android:elevation="4dp"
+                    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                </ImageView>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#d8a5bfc6"
-                    android:clickable="true"
-                    android:elevation="4dp"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:padding="30dp">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                    <TextView
-                        android:id="@+id/event_name_textview"
+
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/first_name_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
+
+                    <EditText
+                        android:id="@+id/first_name_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        tools:text="Event Name" />
-                </FrameLayout>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text" />
 
-                <EditText
-                    android:id="@+id/first_name_edittext"
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/first_name_hint" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                <EditText
-                    android:id="@+id/last_name_edittext"
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/last_name_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
+
+                    <EditText
+                        android:id="@+id/last_name_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text">
+
+                        <requestFocus />
+                    </EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/last_name_hint">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                    <requestFocus />
-                </EditText>
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/phone_number_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
 
-                <EditText
-                    android:id="@+id/phone_number_edittext"
+                    <EditText
+                        android:id="@+id/phone_number_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text">
+
+                        <requestFocus />
+                    </EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone_number_hint"
-                    android:inputType="number" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                <EditText
-                    android:id="@+id/email_edittext"
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/email_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
+
+                    <EditText
+                        android:id="@+id/email_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:enabled="false"
+                        android:inputType="none"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text">
+
+                    </EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/email_hint"
-                    android:inputType="none" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                <EditText
-                    android:id="@+id/facebook_edittext"
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/facebook_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
+
+                    <EditText
+                        android:id="@+id/facebook_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text">
+
+                    </EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Facebook username" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/bg_ccv"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
-                <EditText
-                    android:id="@+id/no_seats_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/number_of_seats_hint"
-                    android:inputType="number" />
+                    <com.ehab.rakabny.customviews.TextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="6dp"
+                        android:text="@string/number_of_seats_hint"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="@dimen/sub_text" />
+
+                    <EditText
+                        android:id="@+id/no_seats_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLength="25"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text"
+                        android:textColorHint="@color/text"
+                        android:textSize="@dimen/text"></EditText>
+
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/register_button"

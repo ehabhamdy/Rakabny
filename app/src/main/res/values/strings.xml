@@ -86,5 +86,6 @@
     <string name="saved_ticket_credits">saved ticket credits</string>
     <string name="saved_username">saved username</string>
     <string name="preference_file_key">rakkebny_preferences</string>
+    <string name="facebook_hint">Facebook</string>
 
 </resources>
