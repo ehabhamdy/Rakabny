@@ -81,5 +81,10 @@
     <string name="number_of_seats_hint">Number of Seats</string>
     <string name="register_event_button_label">Register</string>
     <string name="event_registration_tip">For payment and inquiries 01141943416 -  01280527683</string>
+    <string name="registration_activity_title">Registration</string>
+    <string name="saved_email">saved email</string>
+    <string name="saved_ticket_credits">saved ticket credits</string>
+    <string name="saved_username">saved username</string>
+    <string name="preference_file_key">rakkebny_preferences</string>
 
 </resources>

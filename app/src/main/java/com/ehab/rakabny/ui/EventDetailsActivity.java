@@ -1,37 +1,166 @@
 package com.ehab.rakabny.ui;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ehab.rakabny.R;
-import com.ehab.rakabny.customviews.TextViewLight;
 import com.ehab.rakabny.model.Event;
-import com.squareup.picasso.Picasso;
+import com.ehab.rakabny.model.EventRegistrationInformation;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class EventDetailsActivity extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-    private TextView tv;
-    private ImageView mainBackdrop;
+import butterknife.BindView;;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class EventDetailsActivity extends BaseActivity {
+
+    private Toolbar mToolbar;
+
+    private String eventTitle;
+
+    @BindView(R.id.first_name_edittext)
+    EditText firstNameEditText;
+
+    @BindView(R.id.last_name_edittext)
+    EditText lastNameEditText;
+
+    @BindView(R.id.phone_number_edittext)
+    EditText phoneNumberEditText;
+
+    @BindView(R.id.email_edittext)
+    EditText emailEditText;
+
+    @BindView(R.id.facebook_edittext)
+    EditText facebookEditText;
+
+    @BindView(R.id.no_seats_edittext)
+    EditText numberOfSeatsEditText;
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
+        ButterKnife.bind(this);
 
-        Intent inte = getIntent();
+        setUpToolbar(getString(R.string.registration_activity_title));
 
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String user_email = sharedPref.getString(getString(R.string.saved_email), "");
+        String user_username = sharedPref.getString(getString(R.string.saved_username), "");
+        int numberOfTickets = sharedPref.getInt(getString(R.string.saved_ticket_credits), 0);
+
+        firstNameEditText.setText(user_username);
+        emailEditText.setText(user_email);
+
+        Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         Event event = bundle.getParcelable(EventsActivity.EXTRA_EVENT_DETAILS);
+        eventTitle = event.name;
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDatabase.getReference();
+
+    }
+
+    @OnClick(R.id.register_button)
+    public void register(View view) {
+        if (!validateForm()) {
+            return;
+        }
+        saveEventData();
+    }
+
+    private void saveEventData() {
+        String key = mDatabaseReference.child("orders").push().getKey();
+        String username = firstNameEditText.getText().toString();
+        String lastName = lastNameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        int seats = Integer.parseInt(numberOfSeatsEditText.getText().toString());
+        int phone = Integer.parseInt(phoneNumberEditText.getText().toString());
+        String facebook = facebookEditText.getText().toString();
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
 
-//        tv = (TextView) findViewById(R.id.tt);
-//        tv.setText(event.description);
+        final String userId = getUid();
 
-        mainBackdrop = (ImageView) findViewById(R.id.main_backdrop);
-        Picasso.with(this).load(event.posterUrl).into(mainBackdrop);
+        EventRegistrationInformation registrationInfo = new EventRegistrationInformation(eventTitle, username, lastName, email, phone, facebook, seats, currentDateTimeString);
+
+        Map<String, Object> postValues = registrationInfo.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        childUpdates.put("/event_registrations/" + eventTitle + "/" + key, postValues);
+        childUpdates.put("/user-events/" + userId + "/" + key, postValues);
+
+        mDatabaseReference.updateChildren(childUpdates);
+
+        Toast.makeText(this, "Thank you for registration", Toast.LENGTH_SHORT).show();
+        finish();
+
+    }
+
+    private boolean validateForm() {
+        boolean result = true;
+        if (TextUtils.isEmpty(firstNameEditText.getText().toString())) {
+            firstNameEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            firstNameEditText.setError(null);
+        }
+
+        if (TextUtils.isEmpty(lastNameEditText.getText().toString())) {
+            lastNameEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            lastNameEditText.setError(null);
+        }
+
+        if (TextUtils.isEmpty(emailEditText.getText().toString())) {
+            emailEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            emailEditText.setError(null);
+        }
+
+        if (TextUtils.isEmpty(phoneNumberEditText.getText().toString())) {
+            phoneNumberEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            phoneNumberEditText.setError(null);
+        }
+
+        if (TextUtils.isEmpty(numberOfSeatsEditText.getText().toString())) {
+            numberOfSeatsEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            numberOfSeatsEditText.setError(null);
+        }
+
+        if (TextUtils.isEmpty(facebookEditText.getText().toString())) {
+            facebookEditText.setError(getString(R.string.email_field_required_text));
+            result = false;
+        } else {
+            facebookEditText.setError(null);
+        }
 
 
+        return result;
     }
 }

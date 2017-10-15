@@ -56,7 +56,9 @@
         <activity
             android:name=".ui.EventsActivity"
             android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.EventDetailsActivity"></activity>
+        <activity
+            android:name=".ui.EventDetailsActivity"
+            android:parentActivityName=".ui.EventsActivity"></activity>
     </application>
 
 </manifest>

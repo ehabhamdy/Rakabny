@@ -1,6 +1,8 @@
 package com.ehab.rakabny.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static final String PUBLISH_KEY = BuildConfig.PUB_KEY;
     public static final String SUBSCRIBE_KEY = BuildConfig.SUB_KEY;
 
+    SharedPreferences sharedPref;
     Toolbar mToolbar;
     private GoogleMap mMap;
     private PubNub mPubNub;
@@ -97,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         busMarkers = new HashMap<>();
-
+        sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -158,6 +162,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 initPubNub();
                 drawerUtil.SetupNavigationDrawer(mToolbar, MainActivity.this, user);
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.saved_email), user.email);
+                editor.putInt(getString(R.string.saved_ticket_credits), user.numberOfTickets);
+                editor.putString(getString(R.string.saved_username), user.username);
+                editor.commit();
 
             }
 

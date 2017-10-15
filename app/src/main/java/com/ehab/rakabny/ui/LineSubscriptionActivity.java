@@ -93,10 +93,7 @@ public class LineSubscriptionActivity extends AppCompatActivity {
                                 RadioButton selectedLineRadio = (RadioButton) findViewById(selectedId);
 
                                 mDatabase = FirebaseDatabase.getInstance().getReference();
-
-                                // TODO: Change the path to read from the passenger node
                                 mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
-
 
 
                                 sDialog
