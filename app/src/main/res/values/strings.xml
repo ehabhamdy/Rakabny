@@ -82,10 +82,10 @@
     <string name="register_event_button_label">Register</string>
     <string name="event_registration_tip">For payment and inquiries 01141943416 -  01280527683</string>
     <string name="registration_activity_title">Registration</string>
-    <string name="saved_email">saved email</string>
-    <string name="saved_ticket_credits">saved ticket credits</string>
-    <string name="saved_username">saved username</string>
-    <string name="preference_file_key">rakkebny_preferences</string>
-    <string name="facebook_hint">Facebook</string>
+    <string name="saved_email" translatable="false">saved email</string>
+    <string name="saved_ticket_credits" translatable="false">saved ticket credits</string>
+    <string name="saved_username" translatable="false">saved username</string>
+    <string name="preference_file_key" translatable="false">rakkebny_preferences</string>
+    <string name="facebook_hint" translatable="false">Facebook</string>
 
 </resources>

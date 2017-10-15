@@ -82,6 +82,7 @@
     <string name="number_of_seats_hint">عدد الكراسي</string>
     <string name="register_event_button_label">تسجيل الان</string>
     <string name="event_registration_tip">للدفع والاستعلام 01141943416 -  01280527683</string>
+    <string name="registration_activity_title">التسجيل</string>
 
 
 </resources>
