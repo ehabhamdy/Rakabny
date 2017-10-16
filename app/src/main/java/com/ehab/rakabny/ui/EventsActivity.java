@@ -65,10 +65,16 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
     }
 
     @Override
-    public void onListItemClick(Event event) {
-        Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
-        intent.putExtra(EXTRA_EVENT_DETAILS, event);
-        startActivity(intent);
+    public void onListItemClick(Event event, View v) {
+        if(v.getId() == R.id.reserve_button) {
+            Intent intent = new Intent(getApplicationContext(), EventRegistrationActivity.class);
+            intent.putExtra(EXTRA_EVENT_DETAILS, event);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
+            intent.putExtra(EXTRA_EVENT_DETAILS, event);
+            startActivity(intent);
+        }
     }
 
 
@@ -191,6 +197,9 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
             public TextView descriptionView;
             public ImageView posterImageView;
             public TextView priceTextView;
+            public TextView learnMoreButton;
+            public TextView reserveButton;
+
 
             public EventViewHolder(View itemView) {
                 super(itemView);
@@ -199,14 +208,16 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
                 descriptionView = (TextView) itemView.findViewById(R.id.description_textview);
                 posterImageView = (ImageView) itemView.findViewById(R.id.poster_imageview);
                 priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
+                reserveButton = (TextView) itemView.findViewById((R.id.reserve_button));
                 itemView.setOnClickListener(this);
+                reserveButton.setOnClickListener(this);
             }
 
             @Override
             public void onClick(View v) {
                 int clickPosition = getAdapterPosition();
                 Event clickedEvent = mEvents.get(clickPosition);
-                mOnClickListener.onListItemClick(clickedEvent);
+                mOnClickListener.onListItemClick(clickedEvent, v);
             }
         }
 

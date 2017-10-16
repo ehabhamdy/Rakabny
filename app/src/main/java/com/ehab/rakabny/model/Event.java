@@ -11,6 +11,7 @@ import android.os.Parcelable;
 public class Event implements Parcelable {
     public String name;
     public String description;
+    public String detailedDescription;
     public int price;
     public String posterUrl;
     public String bannerUrl;
@@ -22,6 +23,7 @@ public class Event implements Parcelable {
     protected Event(Parcel in) {
         name = in.readString();
         description = in.readString();
+        detailedDescription = in.readString();
         price = in.readInt();
         posterUrl = in.readString();
         status = in.readString();
@@ -49,6 +51,7 @@ public class Event implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(description);
+        dest.writeString(detailedDescription);
         dest.writeInt(price);
         dest.writeString(posterUrl);
         dest.writeString(status);

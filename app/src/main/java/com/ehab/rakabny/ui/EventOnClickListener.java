@@ -1,5 +1,7 @@
 package com.ehab.rakabny.ui;
 
+import android.view.View;
+
 import com.ehab.rakabny.model.Event;
 
 /**
@@ -7,5 +9,5 @@ import com.ehab.rakabny.model.Event;
  */
 
 public interface EventOnClickListener {
-    void onListItemClick(Event clickedItemIndex);
+    void onListItemClick(Event clickedItemIndex, View v);
 }
