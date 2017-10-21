@@ -7,7 +7,9 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="5dp"
     android:background="@drawable/rounded_corners"
-    android:elevation="8dp">
+    android:clickable="true"
+    android:elevation="8dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +24,7 @@
                 android:id="@+id/poster_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:scaleType="fitXY" />
+                android:src="@drawable/placeholder"/>
 
         </FrameLayout>
 
@@ -36,31 +38,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_weight="10"
                     android:id="@+id/event_name_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_weight="10"
                     android:text="Music Park"
                     android:textColor="#000"
                     android:textStyle="bold" />
+
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price"/>
+                    android:layout_weight="1"
+                    android:text="Price" />
 
                 <TextView
                     android:id="@+id/price_textview"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="right"
-                    android:text="Price"/>
+                    android:text="Price" />
             </LinearLayout>
 
             <TextView

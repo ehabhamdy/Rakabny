@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.instabug.library.core.ui.BaseContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -178,6 +178,7 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
             holder.descriptionView.setText(event.description);
             holder.priceTextView.setText(Integer.toString(event.price));
             Picasso.with(mContext).load(event.posterUrl).into(holder.posterImageView);
+            holder.posterImageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
 
         @Override

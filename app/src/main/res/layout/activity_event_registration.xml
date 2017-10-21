@@ -156,10 +156,7 @@
                         android:paddingRight="5dp"
                         android:textColor="@color/text"
                         android:textColorHint="@color/text"
-                        android:textSize="@dimen/text">
-
-                        <requestFocus />
-                    </EditText>
+                        android:textSize="@dimen/text"/>
 
                 </LinearLayout>
 

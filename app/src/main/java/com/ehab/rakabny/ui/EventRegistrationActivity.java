@@ -79,7 +79,7 @@ public class EventRegistrationActivity extends BaseActivity {
         Event event = bundle.getParcelable(EventsActivity.EXTRA_EVENT_DETAILS);
         Picasso.with(this).load(event.bannerUrl).into(posterImageView);
 
-        Toast.makeText(this, event.name, Toast.LENGTH_SHORT).show();
+        eventTitle = event.name.replaceAll(" ", "_").toLowerCase();
 
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference();
