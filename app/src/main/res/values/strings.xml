@@ -87,5 +87,7 @@
     <string name="saved_username" translatable="false">saved username</string>
     <string name="preference_file_key" translatable="false">rakkebny_preferences</string>
     <string name="facebook_hint" translatable="false">Facebook</string>
+    <string name="registration_confirmation_dialog_title">Good job!</string>
+    <string name="registration_confirmation_dialog_message">Registration Confirmed, Ticked payments will be within 24 hours otherwise your registration will be cancelled automatically</string>
 
 </resources>
