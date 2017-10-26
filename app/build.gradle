@@ -9,14 +9,14 @@ android {
             storePassword '123456'
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ehab.rakabny"
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 4
-        versionName "1.03"
+        targetSdkVersion 26
+        versionCode 5
+        versionName "1.04"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "SUB_KEY", SUB_KEY)
         buildConfigField("String", "PUB_KEY", PUB_KEY)
@@ -44,8 +44,8 @@ dependencies {
         transitive = true
     }
     compile 'com.pubnub:pubnub:4.2.3'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.google.android.gms:play-services-location:11.0.2'
     compile 'com.google.android.gms:play-services-maps:11.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -53,12 +53,16 @@ dependencies {
     compile 'com.google.firebase:firebase-database:11.0.2'
     compile 'com.jakewharton:butterknife:8.6.0'
     /*compile 'com.instabug.library:instabug:4.2.6'*/
-    compile 'com.android.support:cardview-v7:25.4.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
     compile 'com.google.firebase:firebase-storage:11.0.2'
     compile 'cn.pedant.sweetalert:library:1.3'
+    compile 'com.yarolegovich:lovely-dialog:1.0.7'
+
+    compile 'com.afollestad.material-dialogs:commons:0.9.5.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation 'com.android.support:design:26.1.0'
 }
 repositories {
     mavenCentral()
