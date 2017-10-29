@@ -89,5 +89,6 @@
     <string name="facebook_hint" translatable="false">Facebook</string>
     <string name="registration_confirmation_dialog_title">Good job!</string>
     <string name="registration_confirmation_dialog_message">Registration Confirmed, Ticked payments will be within 24 hours otherwise your registration will be cancelled automatically</string>
+    <string name="edit">EDIT</string>
 
 </resources>

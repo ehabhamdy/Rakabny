@@ -109,7 +109,7 @@ public class EventRegistrationActivity extends BaseActivity {
                             Toast.makeText(getApplicationContext(), R.string.registration_confirmation_dialog_title, Toast.LENGTH_SHORT).show();
                         }
                     })
-                    .setNegativeButton(android.R.string.no, null)
+                    .setNegativeButton(R.string.edit, null)
                     .show();
         }
     }

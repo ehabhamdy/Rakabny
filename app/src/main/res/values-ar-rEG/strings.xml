@@ -85,6 +85,7 @@
     <string name="registration_activity_title">التسجيل</string>
     <string name="registration_confirmation_dialog_title">تاكيد التسجيل</string>
     <string name="registration_confirmation_dialog_message">تم تاكيد التسجيل، سيتم الغاء الحجز في خلال ٢٤ ساعه في حاله عدم الدفع</string>
+    <string name="edit">تعديل</string>
 
 
 </resources>
