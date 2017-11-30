@@ -48,6 +48,7 @@ import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.models.consumer.PNStatus;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -383,14 +384,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getResources().getString(R.string.reservation_dialog_title))
-                .setContentText(getResources().getString(R.string.reservation_dialog_body_text))
-                .setConfirmText(getResources().getString(R.string.reservation_dialog_yes_button_text))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        new LovelyStandardDialog(this)
+                .setTopColorRes(R.color.colorPrimary)
+                .setButtonsColorRes(R.color.primary_dark)
+                .setIcon(R.drawable.ic_info_black_48dp)
+                .setTitle(R.string.reservation_dialog_title)
+                .setMessage(R.string.reservation_dialog_body_text)
+                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-
+                    public void onClick(View v) {
                         if (tickets > 0) {
                             //Charge one ticket from the user
                             tickets--;
@@ -402,31 +404,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Ticket t = new Ticket(username, key, FirebaseAuth.getInstance().getCurrentUser().getUid(), userCurrentLocation);
                             String bus = marker.getTitle();
                             mFirebaseDatabase.getReference().child("reservations").child(bus.substring(0, bus.length() - 2)).child(key).setValue(t);
-                            sDialog
-                                    .setTitleText(getString(R.string.reservation_completed_dialog_title))
-                                    .setContentText(getString(R.string.reservation_completed_dialog_content_text))
-                                    .setConfirmText(getString(R.string.done_label_text))
-                                    .setConfirmClickListener(null)
-                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+
+
+                            new LovelyStandardDialog(MainActivity.this)
+                                    .setTopColorRes(R.color.colorPrimary)
+                                    .setButtonsColorRes(R.color.primary_dark)
+                                    .setIcon(R.drawable.ic_info_black_48dp)
+                                    .setTitle(R.string.reservation_completed_dialog_title)
+                                    .setMessage(R.string.reservation_completed_dialog_content_text).show();
+
+
 
                         } else {
-                            sDialog
-                                    .setTitleText(getResources().getString(R.string.reservation_error_dialog_title))
-                                    .setContentText(getResources().getString(R.string.reservation_error_dialog_body_text))
-                                    .setConfirmText(getString(R.string.done_label_text))
-                                    .setConfirmClickListener(null)
-                                    .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+
+                            new LovelyStandardDialog(MainActivity.this)
+                                    .setTopColorRes(R.color.colorPrimary)
+                                    .setButtonsColorRes(R.color.primary_dark)
+                                    .setIcon(R.drawable.ic_info_black_48dp)
+                                    .setTitle(R.string.reservation_error_dialog_title)
+                                    .setMessage(R.string.reservation_error_dialog_body_text).show();
+
                         }
                     }
-
                 })
-                .setCancelText(getResources().getString(R.string.reservation_dialog_no_button_text))
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        sDialog.dismiss();
-                    }
-                })
+                .setNegativeButton(android.R.string.no, null)
                 .show();
 
         return false;

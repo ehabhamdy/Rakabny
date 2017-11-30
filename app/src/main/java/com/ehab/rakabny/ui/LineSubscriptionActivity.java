@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ehab.rakabny.R;
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,37 +82,30 @@ public class LineSubscriptionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final int selectedId = linesGroup.getCheckedRadioButtonId();
 
-                new SweetAlertDialog(LineSubscriptionActivity.this, WARNING_TYPE)
-                        .setTitleText(getString(R.string.linechange_dialog_title))
-                        .setContentText(getString(R.string.linechange_dialog_body))
-                        .setConfirmText(getResources().getString(R.string.reservation_dialog_yes_button_text))
-                        .setConfirmClickListener(new OnSweetClickListener() {
+                new LovelyStandardDialog(LineSubscriptionActivity.this)
+                        .setTopColorRes(R.color.colorPrimary)
+                        .setButtonsColorRes(R.color.primary_dark)
+                        .setIcon(R.drawable.ic_info_black_48dp)
+                        .setTitle(R.string.linechange_dialog_title)
+                        .setMessage(R.string.linechange_dialog_body)
+                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-
+                            public void onClick(View v) {
                                 // find the radiobutton by returned id
                                 RadioButton selectedLineRadio = (RadioButton) findViewById(selectedId);
 
                                 mDatabase = FirebaseDatabase.getInstance().getReference();
                                 mDatabase.child("passengers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("line").setValue(selectedLineRadio.getText());
-
-
-                                sDialog
-
-                                        .changeAlertType(SUCCESS_TYPE);
-
                             }
-
                         })
-                        .setCancelText(getResources().getString(R.string.reservation_dialog_no_button_text))
-                        .setCancelClickListener(new OnSweetClickListener() {
+                        .setNegativeButton(R.string.edit, new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sDialog) {
+                            public void onClick(View v) {
                                 setCurrentLine(line);
-                                sDialog.dismiss();
                             }
                         })
                         .show();
+
             }
         });
     }
