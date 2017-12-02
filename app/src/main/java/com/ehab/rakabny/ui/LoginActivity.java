@@ -7,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,33 +18,42 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "Message";
-    protected TextView mSignUpTextView;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     DatabaseReference muser;
     private FirebaseAuth mAuth;
-    private EditText mEmailField;
-    private EditText mPasswordField;
-    private Button btn;
+
+    @BindView(R.id.login_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView tv;
+    @BindView(R.id.sigup_textview)
+    TextView mSignUpTextView;
+    @BindView(R.id.email_edittext)
+    TextView mEmailField;
+    @BindView(R.id.password_edittext)
+    TextView mPasswordField;
+    @BindView(R.id.login_button)
+    TextView loginButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        ButterKnife.bind(LoginActivity.this);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView tv = (TextView) mToolbar.findViewById(R.id.toolbar_title);
         tv.setText(R.string.login_activity_title);
-        //Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/VarelaRound-Regular.ttf");
-        //tv.setTypeface(custom_font);
 
-
-        mSignUpTextView = (TextView) findViewById(R.id.sigupText);
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,14 +62,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-
-        mEmailField = (EditText) findViewById(R.id.editText);
-        mPasswordField = (EditText) findViewById(R.id.editText2);
-
-        btn = (Button) findViewById(R.id.button);
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
