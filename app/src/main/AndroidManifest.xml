@@ -30,6 +30,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".ui.LineSubscriptionActivity"
             android:parentActivityName=".ui.MainActivity" />
@@ -59,6 +60,10 @@
             android:name=".ui.EventRegistrationActivity"
             android:parentActivityName=".ui.EventsActivity" />
         <activity android:name=".ui.EventDetailsActivity" />
+        <activity android:name=".ui.SMSSignupActivity" />
+        <activity
+            android:name=".ui.StartActivity"
+            android:theme="@style/StartActivityTheme"></activity>
     </application>
 
 </manifest>

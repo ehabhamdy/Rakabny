@@ -22,6 +22,7 @@ import com.ehab.rakabny.model.Passenger;
 import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.utils.JsonUtil;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
+//import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,11 +62,12 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-
+    private static final int RC_SIGN_IN = 123;
     public static final String TAG = MainActivity.class.getName();
     private static final int LOCATION_REQUEST = 50;
     public static final String PUBLISH_KEY = BuildConfig.PUB_KEY;
     public static final String SUBSCRIBE_KEY = BuildConfig.SUB_KEY;
+
 
     SharedPreferences sharedPref;
     Toolbar mToolbar;
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            if (user.isEmailVerified()) {
+            if (user.getPhoneNumber() != null || user.isEmailVerified()) {
 
                 activityUISetup();
 
@@ -126,9 +128,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             } else {
                 // Driver signed out or No Network Connection
                 openLoginActivity();
+               /* startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(
+                                        Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
+                                .build(),
+                        RC_SIGN_IN);*/
             }
         } else {
             openLoginActivity();
+           /* startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(
+                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
+                            .build(),
+                    RC_SIGN_IN);*/
         }
     }
 
@@ -182,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, StartActivity.class);
         //Removing HomeActivity from the back stack
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -42,6 +42,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_button)
     TextView loginButton;
 
+    @BindView(R.id.smslogin_button)
+    TextView smsLoginButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,13 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-
+        smsLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SMSSignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

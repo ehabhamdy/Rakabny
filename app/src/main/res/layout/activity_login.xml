@@ -76,14 +76,7 @@
                         android:padding="10dp" />
 
 
-                    <com.ehab.rakabny.customviews.TextViewLight
-                        android:id="@+id/sigup_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="20dp"
-                        android:text="@string/signup"
-                        android:textColor="@color/colorPrimaryDark" />
+
 
                 </LinearLayout>
             </FrameLayout>
@@ -99,6 +92,24 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="17dp" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/sigup_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="@string/signup"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/smslogin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="SMS login"
+                android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
     </ScrollView>
