@@ -126,13 +126,10 @@ public class SMSSignupActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             Toast.makeText(SMSSignupActivity.this, "onComplete", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = task.getResult().getUser();
-                            // [START_EXCLUDE]
-                            //updateUI(STATE_SIGNIN_SUCCESS, user);
-                            // [END_EXCLUDE]
 
                             //TODO: CREATE SCREEN TO ASK USER FOR ADDITIONAL INFORMATION
                             String defaultLine = getString(R.string.default_line_text);
-                            Passenger passenger = new Passenger(/*name*/"Ehab", /*email*/"ehab@gmail.com", /*defaultLine*/ defaultLine, /*numberOfTickets*/0);
+                            Passenger passenger = new Passenger(/*name*/"", /*email*/"", /*defaultLine*/ defaultLine, /*numberOfTickets*/0);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
                             mDatabase.child("passengers").child(user.getUid()).setValue(passenger);
@@ -147,15 +144,11 @@ public class SMSSignupActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                // [START_EXCLUDE silent]
                                 //mVerificationField.setError("Invalid code.");
                                 Toast.makeText(SMSSignupActivity.this, "Invalid Code", Toast.LENGTH_SHORT).show();
-                                // [END_EXCLUDE]
                             }
-                            // [START_EXCLUDE silent]
                             // Update UI
                             ///**/updateUI(STATE_SIGNIN_FAILED);
-                            // [END_EXCLUDE]
                         }
                     }
                 });
