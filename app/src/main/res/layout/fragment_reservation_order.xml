@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fefefe"
+    android:orientation="vertical">
+
+    <com.ehab.rakabny.customviews.TextViewLight
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Select your Itinerary"
+        android:textColor="@color/md_black_1000"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="18dp">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="6dp"
+                android:contentDescription="Pickup location"
+                android:src="@drawable/start_icon" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="6dp"
+                android:contentDescription="to"
+                android:src="@drawable/to_icon" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:contentDescription="Drop of location"
+                android:src="@drawable/end_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/from_spinner"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_ccv"
+                android:entries="@array/from_locations"
+                android:paddingStart="10dp" />
+
+
+            <Spinner
+                android:id="@+id/to_spinner"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_ccv"
+                android:entries="@array/to_locations"
+                android:paddingStart="10dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="Add passenger"
+            android:src="@drawable/users_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_ccv"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <EditText
+                android:id="@+id/number_seats_edittext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:hint="Number of Seats"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="1"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/text"
+                android:textColorHint="@color/text"
+                android:textSize="@dimen/text" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="Select date icon"
+            android:src="@drawable/calender_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_ccv"
+            android:orientation="horizontal"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp">
+
+            <com.ehab.rakabny.customviews.TextViewMedium
+                android:id="@+id/reservation_date_textview"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:text="23/10/1990"
+                android:textColor="@color/md_black_1000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="Choose time icon"
+            android:src="@drawable/time_icon" />
+
+        <Spinner
+            android:id="@+id/time_spinner"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_ccv"
+            android:entries="@array/times"
+            android:paddingStart="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
+

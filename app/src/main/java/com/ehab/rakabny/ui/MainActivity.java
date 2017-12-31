@@ -388,11 +388,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return false;
     }
 
-    public void openLineSubscription(View view) {
-        Intent openSubscriptionIntent = new Intent(getApplicationContext(), LineSubscriptionActivity.class);
-        openSubscriptionIntent.putExtra(NavigationDrawerUtil.SUB_LINE_EXTRA, lineChannelSubscription);
-        if (lineChannelSubscription != null)
-            startActivity(openSubscriptionIntent);
+    public void reserveBusClick(View view) {
+        Intent openBusReservationIntent = new Intent(getApplicationContext(), BusReservationActivity.class);
+        startActivity(openBusReservationIntent);
         overridePendingTransition(R.anim.slide_up, R.anim.no_change);
     }
 
@@ -436,7 +434,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                     .setIcon(R.drawable.ic_info_black_48dp)
                                     .setTitle(R.string.reservation_completed_dialog_title)
                                     .setMessage(R.string.reservation_completed_dialog_content_text).show();
-
 
 
                         } else {

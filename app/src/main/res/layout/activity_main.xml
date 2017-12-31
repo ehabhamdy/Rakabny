@@ -43,10 +43,14 @@
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="#ceffffff"
+            android:background="@drawable/bg_btn"
             android:elevation="10dp"
-            android:onClick="openLineSubscription"
-            android:text="@string/select_line_button_text" />
+            android:fontFamily="sans-serif"
+            android:onClick="reserveBusClick"
+            android:text="@string/nav_reserve_bus_label"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
 
     </FrameLayout>
