@@ -10,10 +10,10 @@ android {
         }
     }
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.ehab.rakabny"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 5
         versionName "1.04"
@@ -67,6 +67,8 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     //compile 'com.firebaseui:firebase-ui-auth:3.1.0'
+    compile 'com.exblr:dropdown-menu:1.0.2'
+
 }
 repositories {
     mavenCentral()

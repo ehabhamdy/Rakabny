@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
+import com.ehab.rakabny.ui.BusReservationActivity;
 import com.ehab.rakabny.ui.LoginActivity;
 import com.ehab.rakabny.ui.EventsActivity;
 import com.ehab.rakabny.ui.LineSubscriptionActivity;
@@ -69,17 +70,20 @@ public class NavigationDrawerUtil {
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem main = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.nav_main_label).withTypeface(typeface).withIcon(R.drawable.ic_room_black_24dp);
-        PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_subscribe_label).withTypeface(typeface).withIcon(R.drawable.ic_trending_up_black_24dp);
+        PrimaryDrawerItem ReserveBus = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.nav_reserve_bus_label).withTypeface(typeface).withIcon(R.drawable.ic_bus);
+        PrimaryDrawerItem subsToLine = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_subscribe_label).withTypeface(typeface).withIcon(R.drawable.ic_trending_up_black_24dp);
         //PrimaryDrawerItem tickets = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_tickets_label).withTypeface(typeface).withIcon(R.drawable.ic_ticket_black_24dp);
-        PrimaryDrawerItem matchReservation = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_current_events_label).withTypeface(typeface).withIcon(R.drawable.football);
-        PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.nav_profile_label).withTypeface(typeface).withIcon(R.drawable.ic_person_black_24dp);
-        PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_logout_label).withTypeface(typeface).withIcon(R.drawable.ic_out_black_24dp);
+        PrimaryDrawerItem matchReservation = new PrimaryDrawerItem().withIdentifier(4).withName(R.string.nav_current_events_label).withTypeface(typeface).withIcon(R.drawable.football);
+        PrimaryDrawerItem profile = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.nav_profile_label).withTypeface(typeface).withIcon(R.drawable.ic_person_black_24dp);
+        PrimaryDrawerItem logout = new PrimaryDrawerItem().withIdentifier(6).withName(R.string.nav_logout_label).withTypeface(typeface).withIcon(R.drawable.ic_out_black_24dp);
         //create the drawer and remember the `Drawer` result object
         drawer = new DrawerBuilder()
                 .withActivity(activity)
                 .withToolbar(mToolbar)
                 .addDrawerItems(
                         main,
+                        new DividerDrawerItem(),
+                        ReserveBus,
                         new DividerDrawerItem(),
                         subsToLine,
                         new DividerDrawerItem(),
@@ -99,6 +103,13 @@ public class NavigationDrawerUtil {
                                 drawer.closeDrawer();
                                 return true;
                             case 3:
+                                Intent openBusReservationIntent = new Intent(activity.getApplicationContext(), BusReservationActivity.class);
+                                openBusReservationIntent.putExtra(USERNAME_EXTRA, user.username);
+                                activity.startActivity(openBusReservationIntent);
+                                activity.overridePendingTransition(R.anim.slide_up, R.anim.no_change);
+                                drawer.closeDrawer();
+                                return true;
+                            case 5:
                                 Intent openSubscriptionIntent = new Intent(activity.getApplicationContext(), LineSubscriptionActivity.class);
                                 openSubscriptionIntent.putExtra(SUB_LINE_EXTRA, user.line);
                                 activity.startActivity(openSubscriptionIntent);
@@ -111,12 +122,12 @@ public class NavigationDrawerUtil {
                                 activity.startActivity(openTicketsIntent);
                                 drawer.closeDrawer();
                                 return true;*/
-                            case 5:
+                            case 7:
                                 Intent openMatchResIntent = new Intent(activity.getApplicationContext(), EventsActivity.class);
                                 activity.startActivity(openMatchResIntent);
                                 drawer.closeDrawer();
                                 return true;
-                            case 7:
+                            case 9:
                                 Intent openProfileIntent = new Intent(activity.getApplicationContext(), ProfileActivity.class);
                                 openProfileIntent.putExtra(USERNAME_EXTRA, user.username);
                                 openProfileIntent.putExtra(EMAIL_EXTRA, user.email);
@@ -124,7 +135,7 @@ public class NavigationDrawerUtil {
                                 activity.startActivity(openProfileIntent);
                                 drawer.closeDrawer();
                                 return true;
-                            case 9:
+                            case 11:
                                 FirebaseAuth.getInstance().signOut();
                                 Intent intent = new Intent(activity.getApplicationContext(), LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

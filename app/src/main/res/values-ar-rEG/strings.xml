@@ -56,7 +56,7 @@
     <string name="connection_error_message">لا يوجد اتصال بالانترنت</string>
     <string name="authentication_error_message">يوجد خطا في كلمه السر او البريد</string>
     <string name="signup_feedback_message">من فضلك توجه الي البريد الالكتروني الخاص بك لاستلام رساله التاكيد</string>
-    <string name="progressbar_loading_message">جاري التحميل...</string>
+    <string name="progressbar_loading_message">جاري التحميل&#8230;</string>
     <string name="photo_picker_title">Select Picture</string>
     <string name="ticket_purchase_confirmed_message">تم التاكيد</string>
     <string name="ticket_pref_key">ehab</string>
@@ -64,7 +64,7 @@
     <string name="authentication_failed_message">خطا من فضلك قم بتاكيد عنوان البريدالبريد الالكتروني قبل اول محاوله دخول</string>
     <string name="tickets_text1_text">التذاكر</string>
     <string name="default_line_text">المنشيه : العصافره</string>
-    <string name="progressdialog_loading_text">جاري التحميل...</string>
+    <string name="progressdialog_loading_text">جاري التحميل&#8230;</string>
     <string name="email_field_required_text">مطلوب</string>
     <string name="password_field_required_text">مطلوب</string>
     <string name="signup_failed_message">خطا لم يتم تسجيل حساب المستخدم</string>
@@ -81,11 +81,48 @@
     <string name="phone_number_hint">رقم الهاتف</string>
     <string name="number_of_seats_hint">عدد الكراسي</string>
     <string name="register_event_button_label">تسجيل الان</string>
-    <string name="event_registration_tip">للدفع والاستعلام 01141943416 -  01280527683</string>
+    <string name="event_registration_tip">للدفع والاستعلام 01141943416 &#8211;  01280527683</string>
     <string name="registration_activity_title">التسجيل</string>
     <string name="registration_confirmation_dialog_title">تاكيد التسجيل</string>
     <string name="registration_confirmation_dialog_message">تم تاكيد التسجيل، سيتم الغاء الحجز في خلال ٢٤ ساعه في حاله عدم الدفع</string>
     <string name="edit">تعديل</string>
+    <string name="nav_reserve_bus_label">حجز اتوبيس</string>
+    <string name="bus_reservation_button_label">تاكيد</string>
+    <string name="bus_reservation_activity_title">تفاصيل الحجز</string>
 
+    <string-array name="from_locations">
+        <item>العصافرة</item>
+        <item>امام مبرة العصافرة</item>
+        <item>نفق 45</item>
+        <item>نفق اسكندر ابراهيم</item>
+        <item>خالد ابن الوليد</item>
+        <item>نفق المحروسة</item>
+        <item>سان ستيفنوا</item>
+        <item>نفق جليم</item>
+        <item>نفق المهندسين</item>
+        <item>رشدى اما فندق ازور</item>
+        <item>نفق كليوبترا</item>
+        <item>نفق اسبورتنج</item>
+        <item>نفق كامبشيزرا</item>
+        <item>نفق الشاطبى</item>
+        <item>شارع سوتر</item>
+    </string-array>
+
+    <string-array name="to_locations">
+        <item>هندسة</item>
+        <item>علوم صيدلة</item>
+        <item>المجمع الطبى</item>
+        <item>المجمع النظرى</item>
+    </string-array>
+
+    <string-array name="times">
+        <item>7:30 AM</item>
+        <item>8:00 AM</item>
+        <item>8:30 AM</item>
+        <item>2:30 PM</item>
+        <item>3:00 PM</item>
+        <item>4:00 PM</item>
+        <item>4:30 PM</item>
+    </string-array>
 
 </resources>

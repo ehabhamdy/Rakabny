@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:elevation="4dp"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:theme="@style/ToolbarTheme"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     <RelativeLayout
@@ -15,16 +15,17 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/app_title" />
+            android:src="@drawable/app_title"
+            android:contentDescription="App logo title"/>
 
         <TextView
             android:id="@+id/tickets_textview"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

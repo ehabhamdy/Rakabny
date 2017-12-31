@@ -7,13 +7,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <style name="MainActivityTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
     <style name="StartActivityTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/start_img</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>
