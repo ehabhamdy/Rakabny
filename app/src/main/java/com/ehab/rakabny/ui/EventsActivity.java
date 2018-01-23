@@ -116,7 +116,7 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
 
                     int orderIndex = mEventIds.indexOf(commentKey);
                     if (orderIndex > -1) {
-                        // Replace with the new data
+                        // Replace with the new mData
                         mEvents.set(orderIndex, newEvent);
 
                         // Update the RecyclerView
@@ -134,7 +134,7 @@ public class EventsActivity extends BaseActivity implements EventOnClickListener
 
                     int orderIndex = mEventIds.indexOf(orderKey);
                     if (orderIndex > -1) {
-                        // Remove data from the list
+                        // Remove mData from the list
                         mEventIds.remove(orderIndex);
                         mEvents.remove(orderIndex);
 

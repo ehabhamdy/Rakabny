@@ -67,7 +67,25 @@
         <activity
             android:name=".ui.BusReservationActivity"
             android:label="@string/bus_reservation_activity_title"
-            android:parentActivityName=".ui.MainActivity"></activity>
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
+            android:name=".ui.LocationChooserActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.TimeChooserActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.LocationChooserActivity"
+            android:screenOrientation="portrait" />
+
+        <activit
+            android:name=".ui.BusOrderSummaryActivity"
+            android:parentActivityName=".ui.TimeChooserActivity"
+            android:screenOrientation="portrait"></activit>
+        <activity
+            android:name=".ui.MyReservationActivity"
+            android:parentActivityName=".ui.MainActivity" />
     </application>
 
 </manifest>

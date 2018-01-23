@@ -15,18 +15,18 @@ public class BusReservationInformation {
     String to;
     String date;
     String time;
-    int numberOfSeats;
+    String seats;
 
     public BusReservationInformation() {
     }
 
-    public BusReservationInformation(String name, String from, String to, String date, String time, int numberOfSeats) {
+    public BusReservationInformation(String name, String from, String to, String date, String time, String numberOfSeats) {
         this.name = name;
         this.from = from;
         this.to = to;
         this.date = date;
         this.time = time;
-        this.numberOfSeats = numberOfSeats;
+        this.seats = numberOfSeats;
     }
 
     @Exclude
@@ -37,8 +37,32 @@ public class BusReservationInformation {
         result.put("to", to);
         result.put("date", date);
         result.put("time", time);
-        result.put("seats", numberOfSeats);
+        result.put("seats", seats);
 
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getSeats() {
+        return seats;
     }
 }

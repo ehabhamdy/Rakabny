@@ -90,7 +90,7 @@
     <string name="bus_reservation_button_label">تاكيد</string>
     <string name="bus_reservation_activity_title">تفاصيل الحجز</string>
 
-    <string-array name="from_locations">
+    <string-array name="from_locations_labels">
         <item>العصافرة</item>
         <item>امام مبرة العصافرة</item>
         <item>نفق 45</item>
@@ -108,21 +108,15 @@
         <item>شارع سوتر</item>
     </string-array>
 
-    <string-array name="to_locations">
+    <string-array name="to_locations_labels">
         <item>هندسة</item>
         <item>علوم صيدلة</item>
         <item>المجمع الطبى</item>
         <item>المجمع النظرى</item>
     </string-array>
 
-    <string-array name="times">
-        <item>7:30 AM</item>
-        <item>8:00 AM</item>
-        <item>8:30 AM</item>
-        <item>2:30 PM</item>
-        <item>3:00 PM</item>
-        <item>4:00 PM</item>
-        <item>4:30 PM</item>
-    </string-array>
+
+    <string name="pickup_location_label">اختار بدايه الخط</string>
+    <string name="dropoff_location_label">اختار مكان النزول</string>
 
 </resources>

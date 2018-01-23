@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,17 +16,13 @@ import android.widget.Toast;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.BusReservationInformation;
-import com.ehab.rakabny.model.EventRegistrationInformation;
-import com.ehab.rakabny.model.Ticket;
 import com.ehab.rakabny.utils.NavigationDrawerUtil;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -57,11 +55,14 @@ public class BusReservationActivity extends BaseActivity {
     @BindView(R.id.number_seats_edittext)
     EditText seatsEditText;
 
+    @BindView(R.id.reverse_button)
+    Button reverseImageButton;
+
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mPassengersReference;
-    private DatabaseReference mBusReservationsReference;
+
 
     String name;
+    Boolean reverseFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +93,36 @@ public class BusReservationActivity extends BaseActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra(NavigationDrawerUtil.USERNAME_EXTRA);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mPassengersReference = mFirebaseDatabase.getReference().child("passengers");
-        mBusReservationsReference = mFirebaseDatabase.getReference().child("bus-reservations");
 
         reservationDateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StartTime.show();
+            }
+        });
+
+        reverseImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] from = getResources().getStringArray(R.array.from_locations_labels);
+                String[] to = getResources().getStringArray(R.array.to_locations_labels);
+                ArrayAdapter fromAdapter = new ArrayAdapter(BusReservationActivity.this,
+                        android.R.layout.simple_spinner_dropdown_item, from);
+                ArrayAdapter toAdapter = new ArrayAdapter(BusReservationActivity.this,
+                        android.R.layout.simple_spinner_dropdown_item, to);
+                int fromVal = fromSpinner.getSelectedItemPosition();
+                int toVal = toSpinner.getSelectedItemPosition();
+                if(reverseFlag) {
+                    fromSpinner.setAdapter(toAdapter);
+                    toSpinner.setAdapter(fromAdapter);
+                    reverseFlag = false;
+                }else{
+                    fromSpinner.setAdapter(fromAdapter);
+                    toSpinner.setAdapter(toAdapter);
+                    reverseFlag = true;
+                }
+                fromSpinner.setSelection(toVal);
+                toSpinner.setSelection(fromVal);
             }
         });
     }
@@ -143,7 +167,7 @@ public class BusReservationActivity extends BaseActivity {
         String from = fromSpinner.getSelectedItem().toString();
         String to = toSpinner.getSelectedItem().toString();
         String date = reservationDateTextView.getText().toString();
-        int seats = Integer.parseInt(seatsEditText.getText().toString());
+        String seats = seatsEditText.getText().toString();
         String time = timeSpinner.getSelectedItem().toString();
 
 
@@ -155,7 +179,7 @@ public class BusReservationActivity extends BaseActivity {
 
         Map<String, Object> childUpdates = new HashMap<>();
 
-        childUpdates.put("/bus_reservations/" +  date.replaceAll("/", "-") + "/" + time + "/" + key, postValues);
+        childUpdates.put("/bus_reservations/" + date.replaceAll("/", "-") + "/" + time + "/" + key, postValues);
         childUpdates.put("/user-bus-reservations/" + userId + "/" + key, postValues);
 
         mFirebaseDatabase.getReference().updateChildren(childUpdates);

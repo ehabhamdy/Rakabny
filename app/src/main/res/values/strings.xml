@@ -11,7 +11,7 @@
     <string name="login_activity_title">Login</string>
 
     <string name="nav_main_label">Main</string>
-    <string name="nav_subscribe_label">Subscribe to line</string>
+    <string name="nav_subscribe_label">My Bus Reservation</string>
     <string name="nav_profile_label">Profile</string>
     <string name="nav_settings_label">Settings</string>
     <string name="nav_logout_label">Logout</string>
@@ -92,34 +92,35 @@
     <string name="edit">EDIT</string>
     <string name="nav_reserve_bus_label">Reserve Bus</string>
     <string name="bus_reservation_button_label">Confirm</string>
-    <string name="bus_reservation_activity_title">Reservation Details</string>
+    <string name="bus_reservation_activity_title">Select your Itinerary</string>
+    <string name="pickup_location_label">Choose your pickup Location</string>
+    <string name="dropoff_location_label">Choose your drop off Location</string>
 
-    <string-array name="from_locations">
-        <item>Asafra</item>
-        <item>Mabaret El Asafra </item>
+    <string-array name="from_locations_labels">
+        <item>El-Mandara</item>
+        <item>El-Asafra Train Station</item>
         <item>Nafaq 45</item>
-        <item>Nafaq Eskandar Ebrahim</item>
-        <item>Khaled Ibn Elwaleed</item>
-        <item>Nafaq Elmahrosa</item>
+        <item>Sidi Bishr Train Station</item>
+        <item>Nafaq Iskander Ibrahim</item>
+        <item>Victoria Train Station</item>
+        <item>Nafaq El-Mahrousa</item>
         <item>San Stefano</item>
-        <item>Nafaq Gleim</item>
-        <item>Nafaq Elmohandseen</item>
-        <item>Roshdy Nafaq Azor</item>
-        <item>Nafa Cleopatra</item>
+        <item>Nafaq Gleem</item>
+        <item>Nafaq El-Mohandseen</item>
+        <item>Nafaq Roushdy</item>
+        <item>Nafaq Cleopatera</item>
         <item>Nafaq Sporting</item>
-        <item>Nafaq Kampchesar</item>
-        <item>Nafaq Elshatby</item>
-        <item>Sooter Street</item>
+        <item>Nafaq El-Shatby</item>
     </string-array>
 
-    <string-array name="to_locations">
+    <string-array name="to_locations_labels">
         <item>Faculty of Engineering</item>
-        <item>Faculty of Pharmacy/Science</item>
-        <item>Medical Campus</item>
-        <item>The Campus</item>
+        <item>Faculty of Science</item>
+        <item>El-Mogama3 El-Teby</item>
+        <item>El-Mogama3 El-Nazary</item>
     </string-array>
 
-    <string-array name="times">
+    <string-array name="times" translatable="false">
         <item>7:30 AM</item>
         <item>8:00 AM</item>
         <item>8:30 AM</item>
@@ -128,5 +129,31 @@
         <item>4:00 PM</item>
         <item>4:30 PM</item>
     </string-array>
+
+    <string-array name="from_locations_coordinates" translatable="false">
+        <item>31.276978,30.003926</item>
+        <item>31.271417,30.006895</item>
+        <item>31.259015,29.989211</item>
+        <item>31.257271,29.994528</item>
+        <item>31.267551,29.995620</item>
+        <item>31.248433,29.979889</item>
+        <item>31.254961,29.975495</item>
+        <item>31.245489,29.967578</item>
+        <item>31.240505,29.958967</item>
+        <item>31.238662,29.952797</item>
+        <item>31.234049,29.946047</item>
+        <item>31.224346,29.935316</item>
+        <item>31.211973,29.915788</item>
+        <item>31.211443,29.916151</item>
+    </string-array>
+
+
+    <string-array name="to_locations_coordinates" translatable="false">
+        <item>31.206395,29.924392</item>
+        <item>31.207482,29.918939</item>
+        <item>31.201929,29.907257</item>
+        <item>31.207342,29.910853</item>
+    </string-array>
+
 
 </resources>
