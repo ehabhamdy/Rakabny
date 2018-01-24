@@ -8,15 +8,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary">
-
-        <include layout="@layout/common_toolbar" />
-
-    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,7 +26,7 @@
                 <ImageView
                     android:id="@+id/poster_imageview"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="200dp"
                     android:clickable="true"
                     android:elevation="4dp"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -61,7 +52,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/first_name_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText
@@ -99,7 +90,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/last_name_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText
@@ -139,7 +130,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/phone_number_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText
@@ -177,7 +168,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/email_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText
@@ -218,7 +209,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/facebook_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText
@@ -258,7 +249,7 @@
                         android:layout_gravity="center"
                         android:paddingRight="6dp"
                         android:text="@string/number_of_seats_hint"
-                        android:textColor="@color/lightgrey"
+                        android:textColor="@color/md_black_1000"
                         android:textSize="@dimen/sub_text" />
 
                     <EditText

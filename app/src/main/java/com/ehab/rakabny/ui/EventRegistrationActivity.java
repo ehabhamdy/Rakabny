@@ -32,8 +32,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class EventRegistrationActivity extends BaseActivity {
 
-    private Toolbar mToolbar;
-
     private String eventTitle;
 
     @BindView(R.id.poster_imageview)
@@ -65,8 +63,6 @@ public class EventRegistrationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_registration);
         ButterKnife.bind(this);
-
-        setUpToolbar(getString(R.string.registration_activity_title));
 
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
