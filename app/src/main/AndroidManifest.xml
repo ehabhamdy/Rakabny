@@ -79,10 +79,10 @@
             android:parentActivityName=".ui.LocationChooserActivity"
             android:screenOrientation="portrait" />
 
-        <activit
+        <activity
             android:name=".ui.BusOrderSummaryActivity"
             android:parentActivityName=".ui.TimeChooserActivity"
-            android:screenOrientation="portrait"></activit>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.MyReservationActivity"
             android:parentActivityName=".ui.MainActivity" />
