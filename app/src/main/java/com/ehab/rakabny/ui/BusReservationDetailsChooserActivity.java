@@ -1,22 +1,18 @@
 package com.ehab.rakabny.ui;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ehab.rakabny.R;
-
-import org.w3c.dom.Text;
+import com.shawnlin.numberpicker.NumberPicker;
 
 import java.text.DateFormat;
 import java.util.Arrays;
@@ -31,7 +27,7 @@ import butterknife.OnClick;
 
 import static com.ehab.rakabny.ui.LocationChooserActivity.EXTRA_FROM;
 
-public class TimeChooserActivity extends AppCompatActivity {
+public class BusReservationDetailsChooserActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_title)
     TextView activityTitleTextView;
@@ -50,16 +46,18 @@ public class TimeChooserActivity extends AppCompatActivity {
     @BindView(R.id.time4_textview)
     TextView time4TextView;
 
-    @BindView(R.id.passengers_edittext)
-    EditText passengersEditText;
+    @BindView(R.id.seats_picker)
+    NumberPicker seatsPicker;
 
     @BindView(R.id.date_textview)
     TextView reservationDateTextView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_chooser);
+        setContentView(R.layout.activity_bus_reservation_details_chooser);
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
@@ -130,7 +128,8 @@ public class TimeChooserActivity extends AppCompatActivity {
     @OnClick(R.id.next_button)
     public void nextClicked() {
         Intent intent = new Intent(this, BusOrderSummaryActivity.class);
-        bundle.putString("Seats", passengersEditText.getText().toString());
+
+        bundle.putString("Seats", String.valueOf(seatsPicker.getValue()));
         intent.putExtra("Bundle", bundle);
         startActivity(intent);
     }

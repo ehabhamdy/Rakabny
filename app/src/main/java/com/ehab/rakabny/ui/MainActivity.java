@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.ehab.rakabny.BuildConfig;
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;

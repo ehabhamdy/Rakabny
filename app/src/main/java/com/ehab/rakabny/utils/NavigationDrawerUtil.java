@@ -9,12 +9,10 @@ import android.view.View;
 
 import com.ehab.rakabny.R;
 import com.ehab.rakabny.model.Passenger;
-import com.ehab.rakabny.ui.BusReservationActivity;
 import com.ehab.rakabny.ui.LocationChooserActivity;
 import com.ehab.rakabny.ui.LoginActivity;
 import com.ehab.rakabny.ui.EventsActivity;
-import com.ehab.rakabny.ui.LineSubscriptionActivity;
-import com.ehab.rakabny.ui.MyReservationActivity;
+import com.ehab.rakabny.ui.BusReservationsListActivity;
 import com.ehab.rakabny.ui.ProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -112,7 +110,7 @@ public class NavigationDrawerUtil {
                                 drawer.closeDrawer();
                                 return true;
                             case 5:
-                                Intent openSubscriptionIntent = new Intent(activity.getApplicationContext(), MyReservationActivity.class);
+                                Intent openSubscriptionIntent = new Intent(activity.getApplicationContext(), BusReservationsListActivity.class);
                                 openSubscriptionIntent.putExtra(SUB_LINE_EXTRA, user.line);
                                 activity.startActivity(openSubscriptionIntent);
                                 activity.overridePendingTransition(R.anim.slide_up, R.anim.no_change);

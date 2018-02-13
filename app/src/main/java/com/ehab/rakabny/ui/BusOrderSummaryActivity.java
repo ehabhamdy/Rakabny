@@ -19,9 +19,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -133,8 +136,8 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
             if (polyz != null) {
                 PolylineOptions lineOptions = new PolylineOptions();
                 lineOptions.addAll(polyz);
-                lineOptions.width(15);
-                lineOptions.color(ContextCompat.getColor(context, R.color.colorAccent));
+                lineOptions.width(9);
+                lineOptions.color(ContextCompat.getColor(context, R.color.colorPrimary));
                 mGoogleMap.addPolyline(lineOptions);
                 LatLngBounds bounds;
                 List<String> dropOffLocations = Arrays.asList(getResources().getStringArray(R.array.to_locations_labels));
@@ -146,9 +149,12 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
                             polyz.get(polyz.size() - 1), polyz.get(0));
                 }
                 //CameraPosition cp = CameraPosition.builder().target(polyz.get(0)).zoom(15).build();
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 50);
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90    );
                 //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 500, null);
                 mGoogleMap.animateCamera(cu);
+                Marker pickupMarker = mGoogleMap.addMarker(new MarkerOptions().position(polyz.get(0)).icon(BitmapDescriptorFactory.fromResource(R.drawable.pickup_mark)));
+                Marker dropoffMarker = mGoogleMap.addMarker(new MarkerOptions().position(polyz.get(polyz.size() - 1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.dropoff_mark)));
+
             }
         }
     }

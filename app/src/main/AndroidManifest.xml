@@ -65,26 +65,22 @@
             android:name=".ui.StartActivity"
             android:theme="@style/StartActivityTheme" />
         <activity
-            android:name=".ui.BusReservationActivity"
-            android:label="@string/bus_reservation_activity_title"
-            android:parentActivityName=".ui.MainActivity" />
-        <activity
             android:name=".ui.LocationChooserActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.TimeChooserActivity"
+            android:name=".ui.BusReservationDetailsChooserActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.LocationChooserActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.BusOrderSummaryActivity"
-            android:parentActivityName=".ui.TimeChooserActivity"
+            android:parentActivityName=".ui.BusReservationDetailsChooserActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.MyReservationActivity"
+            android:name=".ui.BusReservationsListActivity"
             android:parentActivityName=".ui.MainActivity" />
     </application>
 

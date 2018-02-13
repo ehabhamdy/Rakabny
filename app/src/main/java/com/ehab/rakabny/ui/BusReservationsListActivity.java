@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyReservationActivity extends AppCompatActivity {
+public class BusReservationsListActivity extends AppCompatActivity {
     private static final String TAG = "Message";
 
     private DatabaseReference mDatabaseRef;

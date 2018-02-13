@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric'
 
 android {
     signingConfigs {
@@ -16,10 +16,10 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.ehab.rakabny"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.1"
+        versionCode 7
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "SUB_KEY", SUB_KEY)
         buildConfigField("String", "PUB_KEY", PUB_KEY)
@@ -69,16 +69,16 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     implementation 'com.android.support:design:26.1.0'
 
-    //compile 'com.firebaseui:firebase-ui-auth:3.1.0'
-    compile 'com.exblr:dropdown-menu:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile 'com.google.code.gson:gson:2.8.2'
 
     //Crashlytics dependencies
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true
-    }
+    //compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+    //    transitive = true
+    //}
     compile 'com.google.firebase:firebase-core:11.8.0'
+    compile 'com.shawnlin:number-picker:2.4.5'
+
 }
 
 

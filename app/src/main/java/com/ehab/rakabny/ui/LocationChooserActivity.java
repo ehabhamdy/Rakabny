@@ -53,6 +53,7 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
     List<String> dropOffCoord;
     List<String> all_locations;
     List<String> all_locations_coord;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +128,7 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
     
     @OnClick(R.id.next_button)
     public void nextClicked(){
-        Intent intent = new Intent(this, TimeChooserActivity.class);
+        Intent intent = new Intent(this, BusReservationDetailsChooserActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_FROM, pickupTextView.getText().toString());
         bundle.putString(EXTRA_TO, dropoffTextview.getText().toString());
