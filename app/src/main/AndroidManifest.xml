@@ -77,6 +77,7 @@
 
         <activity
             android:name=".ui.BusOrderSummaryActivity"
+            android:theme="@style/transpaTheme"
             android:parentActivityName=".ui.BusReservationDetailsChooserActivity"
             android:screenOrientation="portrait"></activity>
         <activity

@@ -149,7 +149,7 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
                             polyz.get(polyz.size() - 1), polyz.get(0));
                 }
                 //CameraPosition cp = CameraPosition.builder().target(polyz.get(0)).zoom(15).build();
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90    );
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 180    );
                 //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp), 500, null);
                 mGoogleMap.animateCamera(cu);
                 Marker pickupMarker = mGoogleMap.addMarker(new MarkerOptions().position(polyz.get(0)).icon(BitmapDescriptorFactory.fromResource(R.drawable.pickup_mark)));

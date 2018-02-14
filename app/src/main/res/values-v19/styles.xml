@@ -5,4 +5,9 @@
         <item name="android:windowBackground">@drawable/start_img</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="transpaTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>
