@@ -16,7 +16,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.ehab.rakabny"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 7
         versionName "1.2"
@@ -53,6 +53,9 @@ dependencies {
     compile 'com.android.support:design:26.1.0'
     compile 'com.google.android.gms:play-services-location:11.8.0'
     compile 'com.google.android.gms:play-services-maps:11.8.0'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
+    compile 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
