@@ -129,7 +129,7 @@ public class SMSSignupActivity extends AppCompatActivity {
 
                             //TODO: CREATE SCREEN TO ASK USER FOR ADDITIONAL INFORMATION
                             String defaultLine = getString(R.string.default_line_text);
-                            Passenger passenger = new Passenger(/*name*/"", /*email*/"", /*defaultLine*/ defaultLine, /*numberOfTickets*/0);
+                            Passenger passenger = new Passenger(/*name*/"", /*email*/"", /*defaultLine*/ defaultLine, /*numberOfTickets*/0, null);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
                             mDatabase.child("passengers").child(user.getUid()).setValue(passenger);

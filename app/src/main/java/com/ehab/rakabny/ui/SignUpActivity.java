@@ -147,7 +147,7 @@ public class SignUpActivity extends BaseActivity {
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
         int numberOfTickets = 0;
-        Passenger passenger = new Passenger(name, email, defaultLine, numberOfTickets);
+        Passenger passenger = new Passenger(name, email, defaultLine, numberOfTickets, null);
 
         mDatabase.child("passengers").child(userId).setValue(passenger);
     }
