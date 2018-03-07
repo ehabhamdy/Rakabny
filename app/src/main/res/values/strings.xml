@@ -95,6 +95,7 @@
     <string name="bus_reservation_activity_title">Select your Itinerary</string>
     <string name="pickup_location_label">Choose your pickup Location</string>
     <string name="dropoff_location_label">Choose your drop off Location</string>
+    <string name="confirmation_dialog_body_text" translatable="false">By pressing confirm, you will have a seat to your name on our microbus. Cancellation is only available before 12AM the day before your trip. Repeated, unexcused cancellations will result in your account being permanently deleted.</string>
 
     <string-array name="from_locations_labels">
         <item>El-Mandara</item>

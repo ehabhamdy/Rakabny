@@ -106,15 +106,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         busMarkers = new HashMap<>();
-        sharedPref = this.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        sharedPref = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final SharedPreferences sharedPref = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 
         if (user != null) {
             if (user.getPhoneNumber() != null || user.isEmailVerified()) {
 
                 activityUISetup();
 
+                lineChannelSubscription = sharedPref.getString("date", "default-date") + sharedPref.getString("time", "default-time");
+                lineChannelSubscription = lineChannelSubscription.replace(",", "");
                 userId = user.getUid();
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
                 mPassengersReference = mFirebaseDatabase.getReference().child("passengers");
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         /*email = user.email;*/
                 username = user.username;
                 tickets = user.numberOfTickets;
-                lineChannelSubscription = user.line;
+                //lineChannelSubscription = user.line;
 
                 ticketsTextView.setText("          " + tickets + " " + getString(R.string.tickets_text1_text));
 

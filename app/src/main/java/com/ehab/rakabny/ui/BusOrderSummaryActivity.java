@@ -2,6 +2,7 @@ package com.ehab.rakabny.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,8 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
 
     private GoogleMap mMap;
     private FirebaseDatabase mFirebaseDatabase;
+    SharedPreferences sharedPref;
+
 
     @BindView(R.id.trip_duration_textview)
     TextView durationTextView;
@@ -79,6 +82,8 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(BusOrderSummaryActivity.this);
+
+        sharedPref = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 
         String api = getString(R.string.google_api_key);
 
@@ -195,7 +200,7 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
         return poly;
     }
 
-    @OnClick(R.id.next_button)
+    @OnClick(R.id.confirm_button)
     public void submit(View view) {
         new LovelyStandardDialog(this)
                 .setTopColorRes(R.color.colorPrimary)
@@ -206,7 +211,32 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
                 .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        saveEventData();
+
+                        new LovelyStandardDialog(BusOrderSummaryActivity.this)
+                                .setTopColorRes(R.color.colorPrimary)
+                                .setButtonsColorRes(R.color.primary_dark)
+                                .setIcon(R.drawable.ic_info_black_48dp)
+                                .setTitle(R.string.reservation_dialog_title)
+                                .setMessage(R.string.confirmation_dialog_body_text)
+                                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        saveEventData();
+
+                                        Toast.makeText(BusOrderSummaryActivity.this, "Thank you for registration", Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(BusOrderSummaryActivity.this, MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                        startActivity(intent);
+
+                                    }
+
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .show();
+
                     }
 
                 })
@@ -225,26 +255,24 @@ public class BusOrderSummaryActivity extends BaseActivity implements OnMapReadyC
         String seats = seatsTextView.getText().toString();
         String time = startTimeTextView.getText().toString();
 
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("date", date);
+        editor.putString("time", time);
+        editor.commit();
 
         final String userId = getUid();
 
-        BusReservationInformation registrationInfo = new BusReservationInformation(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), from, to, date, time, seats);
+        String username = sharedPref.getString(getString(R.string.saved_username), "");
+        BusReservationInformation registrationInfo = new BusReservationInformation(username, from, to, date, time, seats);
 
         Map<String, Object> postValues = registrationInfo.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
 
-        childUpdates.put("/bus_reservations/" + date.replaceAll("/", "-") + "/" + time + "/" + key, postValues);
+        childUpdates.put("/bus-reservations/" + date.replaceAll("/", "-") + "/" + time + "/" + key, postValues);
         childUpdates.put("/user-bus-reservations/" + userId + "/" + key, postValues);
 
         mFirebaseDatabase.getReference().updateChildren(childUpdates);
 
-        Toast.makeText(this, "Thank you for registration", Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
     }
 }

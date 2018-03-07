@@ -11,8 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ehab.rakabny.R;
+import com.ehab.rakabny.model.Passenger;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,44 +61,66 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
     List<String> all_locations;
     List<String> all_locations_coord;
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mAvailabilityReference;
+    private Boolean isReservationAvailable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_chooser);
-        ButterKnife.bind(this);
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAvailabilityReference = mFirebaseDatabase.getReference().child("reservation-availability");
+        mAvailabilityReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                isReservationAvailable = (Boolean) dataSnapshot.getValue();
+                setupActivity();
+            }
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activityTitleTextView.setText("Choose your route");
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
+    private void setupActivity() {
+        if (isReservationAvailable) {
+            setContentView(R.layout.activity_location_chooser);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        locationRecyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(
-                locationRecyclerView.getContext(),
-                layoutManager.getOrientation()
-        );
-        locationRecyclerView.addItemDecoration(mDividerItemDecoration);
-
-        pickupLocationLabels = Arrays.asList(getResources().getStringArray(R.array.from_locations_labels));
-        dropOffLocationlabels = Arrays.asList(getResources().getStringArray(R.array.to_locations_labels));
-
-        pickupCoord = Arrays.asList(getResources().getStringArray(R.array.from_locations_coordinates));
-        dropOffCoord = Arrays.asList(getResources().getStringArray(R.array.to_locations_coordinates));
-
-        all_locations = new ArrayList<>();
-        all_locations.addAll(pickupLocationLabels);
-        all_locations.addAll(dropOffLocationlabels);
-
-        all_locations_coord = new ArrayList<>();
-        all_locations_coord.addAll(pickupCoord);
-        all_locations_coord.addAll(dropOffCoord);
-
-        adapter = new LocationsAdapter(all_locations, this);
-        locationRecyclerView.setAdapter(adapter);
+            ButterKnife.bind(this);
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            activityTitleTextView.setText("Choose your route");
 
 
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            locationRecyclerView.setLayoutManager(layoutManager);
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(
+                    locationRecyclerView.getContext(),
+                    layoutManager.getOrientation()
+            );
+            locationRecyclerView.addItemDecoration(mDividerItemDecoration);
+
+            pickupLocationLabels = Arrays.asList(getResources().getStringArray(R.array.from_locations_labels));
+            dropOffLocationlabels = Arrays.asList(getResources().getStringArray(R.array.to_locations_labels));
+
+            pickupCoord = Arrays.asList(getResources().getStringArray(R.array.from_locations_coordinates));
+            dropOffCoord = Arrays.asList(getResources().getStringArray(R.array.to_locations_coordinates));
+
+            all_locations = new ArrayList<>();
+            all_locations.addAll(pickupLocationLabels);
+            all_locations.addAll(dropOffLocationlabels);
+
+            all_locations_coord = new ArrayList<>();
+            all_locations_coord.addAll(pickupCoord);
+            all_locations_coord.addAll(dropOffCoord);
+
+            adapter = new LocationsAdapter(all_locations, this);
+            locationRecyclerView.setAdapter(adapter);
+        } else {
+            setContentView(R.layout.reservation_closed);
+        }
     }
 
     @Override
@@ -100,13 +129,13 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
             pickupTextView.setText(location);
             dropLayout.setVisibility(View.VISIBLE);
 
-            if(pickupLocationLabels.contains(location))
+            if (pickupLocationLabels.contains(location))
                 adapter.setData(dropOffLocationlabels);
             else
                 adapter.setData(pickupLocationLabels);
 
             clickPointer++;
-        }else if(clickPointer == 1){
+        } else if (clickPointer == 1) {
             nextButtons.setEnabled(true);
             dropoffTextview.setText(location);
         }
@@ -114,9 +143,9 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
 
     @Override
     public void onBackPressed() {
-        if(clickPointer == 0)
+        if (clickPointer == 0)
             super.onBackPressed();
-        else if(clickPointer == 1){
+        else if (clickPointer == 1) {
             clickPointer--;
             pickupTextView.setText(getString(R.string.pickup_location_label));
             dropoffTextview.setText(getString(R.string.dropoff_location_label));
@@ -125,16 +154,16 @@ public class LocationChooserActivity extends AppCompatActivity implements Locati
             nextButtons.setEnabled(false);
         }
     }
-    
+
     @OnClick(R.id.next_button)
-    public void nextClicked(){
+    public void nextClicked() {
         Intent intent = new Intent(this, BusReservationDetailsChooserActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_FROM, pickupTextView.getText().toString());
         bundle.putString(EXTRA_TO, dropoffTextview.getText().toString());
         bundle.putString(EXTRA_FROM_COORD, all_locations_coord.get(all_locations.indexOf(pickupTextView.getText())));
         bundle.putString(EXTRA_TO_COORD, all_locations_coord.get(all_locations.indexOf(dropoffTextview.getText())));
-        intent.putExtra("Bundle" , bundle);
+        intent.putExtra("Bundle", bundle);
         //intent.putExtra(EXTRA_FROM, pickupTextView.getText());
         //intent.putExtra(EXTRA_TO, dropoffTextview.getText());
         //intent.putExtra(EXTRA_FROM_COORD, all_locations_coord.get(all_locations.indexOf(pickupTextView.getText())));
