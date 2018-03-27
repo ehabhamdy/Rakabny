@@ -8,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Arrays;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends BaseActivity {
 
 
@@ -36,6 +44,19 @@ public class SignUpActivity extends BaseActivity {
     EditText mEmailField;
     EditText mPasswordField;
 
+    // new variables added linking using butterknife
+    @BindView (R.id.signup_phoneTextfield)
+    EditText mPhonenumberField;
+
+    @BindView(R.id.gender_spinner)
+    Spinner mGenderSpinner;
+
+    @BindView(R.id.signup_area_spinner)
+    Spinner mAreaSpinner;
+
+    @BindView(R.id.college_spinner)
+    Spinner mCollegeSpinner;
+
     private ProgressDialog mProgressDialog;
 
     String defaultLine;
@@ -44,6 +65,8 @@ public class SignUpActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        ButterKnife.bind(this);
+
         mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -54,6 +77,24 @@ public class SignUpActivity extends BaseActivity {
         tv.setText(R.string.signup_activity_title);
         //Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/VarelaRound-Regular.ttf");
         //tv.setTypeface(custom_font);
+
+        //populating gender spinner with genders
+        List<String> genderList =  Arrays.asList(getResources().getStringArray(R.array.genders));
+        ArrayAdapter<CharSequence> genderAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,genderList);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mGenderSpinner.setAdapter(genderAdapter);
+
+        //populating area spinner from tunnels resource file
+        List<String> mainLocationsList = Arrays.asList(getResources().getStringArray(R.array.main_places));
+        ArrayAdapter<CharSequence> mainPlacesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mainLocationsList);
+        mainPlacesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAreaSpinner.setAdapter(mainPlacesAdapter);
+
+        //populating college spinner from the resource files
+        List<String> collegesList = Arrays.asList(getResources().getStringArray(R.array.colleges));
+        ArrayAdapter<CharSequence> collegesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, collegesList);
+        collegesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCollegeSpinner.setAdapter(collegesAdapter);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -71,16 +112,20 @@ public class SignUpActivity extends BaseActivity {
                 String username = mUsernameField.getText().toString();
                 String email = mEmailField.getText().toString();
                 String password = mPasswordField.getText().toString();
+                String phoneNumber = mPhonenumberField.getText().toString();
+                String gender = mGenderSpinner.getSelectedItem().toString();
+                String area = mAreaSpinner.getSelectedItem().toString();
+                String college = mCollegeSpinner.getSelectedItem().toString();
 
                 //create new user
-                signUp(username, email, password);
+                signUp(username, email, password, phoneNumber, gender, area, college);
             }
         });
 
 
     }
 
-    public void signUp(final String username, final String email, String password) {
+    public void signUp(final String username, final String email, String password, final String phoneNumber, final String gender, final String area, final String college) {
 
         //Check if the email or password fields are empty
         if (!validateForm()) {
@@ -98,7 +143,7 @@ public class SignUpActivity extends BaseActivity {
                         hideProgressDialog();
 
                         if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser(), username, email);
+                            onAuthSuccess(task.getResult().getUser(), username, email, phoneNumber, gender, area, college);
                             FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
 
                         } else {
@@ -124,10 +169,24 @@ public class SignUpActivity extends BaseActivity {
             mPasswordField.setError(null);
         }
 
+        if(TextUtils.isEmpty(mPhonenumberField.getText().toString())){
+            mPhonenumberField.setError(getString(R.string.password_field_required_text));
+            result = false;
+        }else{
+            mPhonenumberField.setError(null);
+        }
+
+        if(mGenderSpinner.getSelectedItem() == null){
+            result = false;
+        }
+        if(mAreaSpinner.getSelectedItem() == null){
+            result = false;
+        }
+
         return result;
     }
 
-    private void onAuthSuccess(FirebaseUser user, String username, String email) {
+    private void onAuthSuccess(FirebaseUser user, String username, String email, String phoneNumber, String gender, String area, String college) {
         //String username = usernameFromEmail(user.getEmail());
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -135,7 +194,7 @@ public class SignUpActivity extends BaseActivity {
                 .build();
 
         // Write new user
-        writeNewUser(user.getUid(), username, email);
+        writeNewUser(user.getUid(), username, email, phoneNumber, gender, area, college);
 
         Toast.makeText(getApplicationContext(), R.string.signup_feedback_message, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, LoginActivity.class);
@@ -145,9 +204,9 @@ public class SignUpActivity extends BaseActivity {
     }
 
     // [START basic_write]
-    private void writeNewUser(String userId, String name, String email) {
+    private void writeNewUser(String userId, String name, String email, String phoneNumber, String gender, String area, String college) {
         int numberOfTickets = 0;
-        Passenger passenger = new Passenger(name, email, defaultLine, numberOfTickets, null);
+        Passenger passenger = new Passenger(name, email, defaultLine, numberOfTickets, "", phoneNumber, gender, area, college);
 
         mDatabase.child("passengers").child(userId).setValue(passenger);
     }

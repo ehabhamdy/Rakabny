@@ -48,7 +48,7 @@
     <string name="tickets_widget_text2_text">Tickets</string>
     <string name="buy_now_widget_button_text">Buy Now</string>
     <string name="line_confirm_button_text">Confirm your Change</string>
-    <string name="user_name_label_text">User Name</string>
+    <string name="user_name_label_text">Username</string>
     <string name="email_label_text">Email</string>
     <string name="tickets_label_text">Tickets</string>
     <string name="subscription_activity_label">Subscribe to line</string>
@@ -64,8 +64,9 @@
     <string name="tickets_text1_text">Tickets</string>
     <string name="default_line_text">Manshia : Asfra</string>
     <string name="progressdialog_loading_text">Loading&#8230;</string>
-    <string name="email_field_required_text">Required</string>
-    <string name="password_field_required_text">Required</string>
+    <string name="email_field_required_text">"Email Required "</string>
+    <string name="password_field_required_text">Password Required</string>
+    <string name="phone_number_field_required_text">Phone Number Required</string>
     <string name="signup_failed_message">Sign Up Failed</string>
     <string name="profile_activity_title">Profile</string>
     <string name="reservation_completed_dialog_title">Reserved</string>
@@ -156,5 +157,46 @@
         <item>31.207342,29.910853</item>
     </string-array>
 
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    
+    <string-array name="main_places">
+        <item>Mansheya</item>
+        <item>Raml Station</item>
+        <item>Shatby</item>
+        <item>Ibrahimiya</item>
+        <item>Sporting</item>
+        <item>Cleopatra</item>
+        <item>Sidi Gaber</item>
+        <item>Roushdy</item>
+        <item>Gleem</item>
+        <item>Saba Basha</item>
+        <item>San Stefano</item>
+        <item>Louran</item>
+        <item>Muhammad Nagib</item>
+        <item>Sidi Beshr</item>
+        <item>Miami</item>
+        <item>45</item>
+        <item>Asafra</item>
+        <item>Mandara</item>
+    </string-array>
 
+    <string-array name="colleges">
+        <item>Faculty of Engineering</item>
+        <item>Faculty of Science</item>
+        <item>Faculty of Agriculture</item>
+        <item>Faculty of Medicine</item>
+        <item>Faculty of Pharmacy</item>
+        <item>Faculty of Arts</item>
+        <item>Faculty of Fine Arts</item>
+        <item>Faculty of Commerce</item>
+        <item>Faculty of Law</item>
+        <item>Faculty of Education</item>
+    </string-array>
+    <string name="gender_label">Gender</string>
+    <string name="phone_label">Phone Number</string>
+    <string name="area_label">Area</string>
+    <string name="college_label">College</string>
 </resources>

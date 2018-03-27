@@ -242,6 +242,122 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <com.ehab.rakabny.customviews.TextViewMedium
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/profile_phone_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right"
+                android:paddingRight="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="01008070689" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <com.ehab.rakabny.customviews.TextViewMedium
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/profile_gender_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right"
+                android:paddingRight="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="Male" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <com.ehab.rakabny.customviews.TextViewMedium
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/area_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/profile_area_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right"
+                android:paddingRight="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="Mansheya" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp">
+
+            <com.ehab.rakabny.customviews.TextViewMedium
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/college_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <com.ehab.rakabny.customviews.TextViewLight
+                android:id="@+id/profile_college_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right"
+                android:paddingRight="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="College of Engineering" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="@color/colorPrimaryDark"
             android:gravity="center"

@@ -5,6 +5,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +27,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.net.URL;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,11 +46,26 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.tickets_textview)
     TextView ticketsTextView;
 
+    @BindView(R.id.profile_college_textview)
+    TextView mCollegeTextView;
+
+    @BindView(R.id.profile_gender_textview)
+    TextView mGenderTextView;
+
+    @BindView(R.id.profile_area_textview)
+    TextView mAreaTextView;
+
+    @BindView(R.id.profile_phone_textview)
+    TextView mPhoneTextView;
+
     @BindView(R.id.logout_button)
     Button logoutButton;
 
     @BindView(R.id.profile_photo_imageview)
     ImageView mProfileImageView;
+
+
+
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mUsersReference;
@@ -60,6 +78,10 @@ public class ProfileActivity extends AppCompatActivity {
     String userName;
     String email;
     String tickets;
+    String college;
+    String gender;
+    String phoneNumber;
+    String area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +99,18 @@ public class ProfileActivity extends AppCompatActivity {
         userName = intent.getStringExtra(NavigationDrawerUtil.USERNAME_EXTRA);
         email = intent.getStringExtra(NavigationDrawerUtil.EMAIL_EXTRA);
         tickets =  intent.getStringExtra(NavigationDrawerUtil.TICKETS_EXTRA);
+        college = intent.getStringExtra(NavigationDrawerUtil.COLLEGE_EXTRA);
+        phoneNumber = intent.getStringExtra(NavigationDrawerUtil.PHONE_EXTRA);
+        gender = intent.getStringExtra(NavigationDrawerUtil.GENDER_EXTRA);
+        area = intent.getStringExtra(NavigationDrawerUtil.AREA_EXTRA);
 
         usernameTextview.setText(userName);
         emailTextview.setText(email);
         ticketsTextView.setText(tickets);
+        mAreaTextView.setText(area);
+        mCollegeTextView.setText(college);
+        mPhoneTextView.setText(phoneNumber);
+        mGenderTextView.setText(gender);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +167,13 @@ public class ProfileActivity extends AppCompatActivity {
             photoRef.putFile(selectedImageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    downloadUri = taskSnapshot.getDownloadUrl().toString();
-
-                    Passenger userUpdatedInfo = new Passenger(userName);
-                    mUsersReference.child(userId).setValue(userUpdatedInfo);
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    downloadUri = downloadUrl.toString();
+//                    Passenger userUpdatedInfo = new Passenger(userName,email,getString(R.string.default_line_text)
+//                            , Integer.parseInt(tickets),taskSnapshot.getDownloadUrl(),phoneNumber,gender,area,college);
+                    //Passenger user = new Passenger(userName,email,getString(R.string.default_line_text),Integer.parseInt(tickets),downloadUrl,phoneNumber,gender,area,college);
+                    //mUsersReference.child(userId).setValue(user);
+                    mUsersReference.child(userId).child("photoUrl").setValue(downloadUri);
                     Picasso.with(mProfileImageView.getContext()).load(downloadUri).into(mProfileImageView);
                 }
             });

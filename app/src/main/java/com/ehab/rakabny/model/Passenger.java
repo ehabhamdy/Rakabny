@@ -16,8 +16,11 @@ public class Passenger {
     public String email;
     public String line;
     public int numberOfTickets = 0;
-    public Uri photoUrl;
-
+    public String photoUrl;
+    public String phoneNumber;
+    public String gender;
+    public String area;
+    public String college;
 
     public Passenger() {
         // Default constructor required for calls to DataSnapshot.getValue(Driver.class)
@@ -27,11 +30,15 @@ public class Passenger {
         this.username = username;
     }
 
-    public Passenger(String username, String email, String line, int numberOfTickets, Uri photoUrl) {
+    public Passenger(String username, String email, String line, int numberOfTickets, String photoUrl, String phoneNumber, String gender, String area, String college) {
         this.username = username;
         this.email = email;
         this.line = line;
         this.numberOfTickets = numberOfTickets;
         this.photoUrl = photoUrl;
+        this.phoneNumber = phoneNumber;
+        this.area = area;
+        this.gender = gender;
+        this.college = college;
     }
 }

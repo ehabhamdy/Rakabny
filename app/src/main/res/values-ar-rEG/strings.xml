@@ -65,8 +65,8 @@
     <string name="tickets_text1_text">التذاكر</string>
     <string name="default_line_text">المنشيه : العصافره</string>
     <string name="progressdialog_loading_text">جاري التحميل&#8230;</string>
-    <string name="email_field_required_text">مطلوب</string>
-    <string name="password_field_required_text">مطلوب</string>
+    <string name="email_field_required_text">البريد الإلكترونى مطلوب</string>
+    <string name="password_field_required_text">الرقم السرى مطلوب</string>
     <string name="signup_failed_message">خطا لم يتم تسجيل حساب المستخدم</string>
     <string name="profile_activity_title">الملف الشخصي</string>
     <string name="reservation_completed_dialog_title">تم الحجز</string>
@@ -118,5 +118,49 @@
 
     <string name="pickup_location_label">اختار بدايه الخط</string>
     <string name="dropoff_location_label">اختار مكان النزول</string>
+
+    <string-array name="genders">
+        <item>ذكر</item>
+        <item>أنثى</item>
+    </string-array>
+
+    <string-array name="main_places">
+        <item>المنشية</item>
+        <item>محطة الرمل</item>
+        <item>الشاطبي</item>
+        <item>الإبراهيمية</item>
+        <item>سبورتنج</item>
+        <item>كليوباترا</item>
+        <item>سيدى جابر</item>
+        <item>رشدى</item>
+        <item>جليم</item>
+        <item>سابا باشا</item>
+        <item>سان ستيفانو</item>
+        <item>لوران</item>
+        <item>محمد نجيب</item>
+        <item>سيدى بشر</item>
+        <item>ميامي</item>
+        <item>45</item>
+        <item>العصافرة</item>
+        <item>المندرة</item>
+    </string-array>
+
+    <string-array name="colleges">
+        <item>كلية الهندسة</item>
+        <item>كلية العلوم</item>
+        <item>كلية الزراعة</item>
+        <item>كلية الطب</item>
+        <item>كلية الصيدلة</item>
+        <item>كلية آداب</item>
+        <item>كلية فنون جميلة</item>
+        <item>كلية التجارة</item>
+        <item>كلية الحقوق</item>
+        <item>كلية التربية</item>
+    </string-array>
+    <string name="phone_number_field_required_text">رقم التليفون مطلوب</string>
+    <string name="gender_label">الجنس</string>
+    <string name="phone_label">رقم التليفون</string>
+    <string name="area_label">المنطقة</string>
+    <string name="college_label">الكلية</string>
 
 </resources>

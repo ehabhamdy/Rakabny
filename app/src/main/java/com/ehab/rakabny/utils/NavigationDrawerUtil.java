@@ -39,6 +39,10 @@ public class NavigationDrawerUtil {
     public static final String USERNAME_EXTRA = "Username_Data";
     public static final String EMAIL_EXTRA = "email_Data";
     public static final String TICKETS_EXTRA = "tickets_Data";
+    public static final String PHONE_EXTRA = "phone_Data";
+    public static final String AREA_EXTRA = "area_Data";
+    public static final String GENDER_EXTRA = "gender_Data";
+    public static final String COLLEGE_EXTRA = "college_Data";
 
     public Drawer getDrawer() {
         return drawer;
@@ -132,6 +136,11 @@ public class NavigationDrawerUtil {
                                 openProfileIntent.putExtra(USERNAME_EXTRA, user.username);
                                 openProfileIntent.putExtra(EMAIL_EXTRA, user.email);
                                 openProfileIntent.putExtra(TICKETS_EXTRA, String.valueOf(user.numberOfTickets));
+                                openProfileIntent.putExtra(PHONE_EXTRA, String.valueOf(user.phoneNumber));
+                                openProfileIntent.putExtra(GENDER_EXTRA, String.valueOf(user.gender));
+                                openProfileIntent.putExtra(AREA_EXTRA, String.valueOf(user.area));
+                                openProfileIntent.putExtra(COLLEGE_EXTRA, String.valueOf(user.college));
+
                                 activity.startActivity(openProfileIntent);
                                 drawer.closeDrawer();
                                 return true;

@@ -65,6 +65,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+
     private static final int RC_SIGN_IN = 123;
     public static final String TAG = MainActivity.class.getName();
     private static final int LOCATION_REQUEST = 50;
