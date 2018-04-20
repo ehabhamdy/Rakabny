@@ -74,6 +74,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.shawnlin:number-picker:2.4.5'
+
+    //Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
 
 

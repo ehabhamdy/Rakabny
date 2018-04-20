@@ -199,4 +199,9 @@
     <string name="phone_label">Phone Number</string>
     <string name="area_label">Area</string>
     <string name="college_label">College</string>
+
+
+    //Facebook SDK string values
+    <string name="facebook_app_id">2040383592669816</string>
+    <string name="fb_login_protocol_scheme">fb2040383592669816</string>
 </resources>

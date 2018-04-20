@@ -27,8 +27,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/gmail_login_button"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
